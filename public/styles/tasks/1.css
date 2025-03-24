@@ -1,0 +1,85 @@
+.task-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.task-header {
+    margin-bottom: 2rem;
+}
+
+.task-title {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.answer-options {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option-item:hover {
+    border-color: #FC4C00;
+}
+
+.option-item input {
+    margin-right: 1rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-check, .btn-next {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-check {
+    background: #FC4C00;
+    color: white;
+}
+
+.btn-next {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+.auth-alert {
+    padding: 1rem;
+    background: #fff3e0;
+    border-radius: 8px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.task-status {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.task-status.completed {
+    background: #e6f6ec;
+    color: #067a4c;
+}
+

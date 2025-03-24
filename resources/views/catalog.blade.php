@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
+        <link rel="stylesheet" href="{{asset('styles/app.css')}}">
+        <link rel="stylesheet" href="{{asset('styles/catalog.css')}}">
+        <style>
+        </style>
+        <title>Learn Physics - Каталог</title>
+    </head>
+    <body>
+        <div class="container">
+        <header class="header">
+            <div class="wrapper">
+                <div class="header__content">
+                    <nav class="header__navigation-container">
+                        <ul class="header__navigation-list">
+                            <li class="header__navigation-item">
+                                <a class="header__navigation-link" href="{{ route('welcome') }}">Главная</a>
+                            </li>
+                            <li class="header__navigation-item active">
+                                <a class="header__navigation-link" href="{{ route('catalog') }}">Каталог</a>
+                            </li>
+                            @auth
+                                <li class="header__navigation-item">
+                                    <a class="header__navigation-link" href="{{ route('dashboard') }}">Личный кабинет</a>
+                                </li>
+                            @else
+                                <li class="header__navigation-item">
+                                    <a class="header__navigation-link" href="{{ route('register') }}">Вход/Регистрация</a>
+                                </li>
+                            @endauth
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="wrapper">
+                <div class="catalog-content">
+                    <h1 class="catalog-title">Каталог разделов</h1>
+                    
+                    @foreach($sections as $section)
+                        <div class="catalog-section">
+                            <div class="section-header">
+                                <span class="section-number">{{ $section->order }}</span>
+                                <h2 class="section-title">{{ $section->title }}</h2>
+                            </div>
+                            
+                            <div class="topics-container">
+                                @foreach($section->topics as $topic)
+                                    <div class="topic-item">
+                                        <a href="{{ route($topic->{'tasks-list-name'}, $topic) }}" 
+                                           class="topic-link">
+                                            <span class="topic-number">{{ $section->order }}.{{ $topic->order }}</span>
+                                            <span class="topic-title">{{ $topic->title }}</span>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </main>
+        </div>
+    </body>
+</html>
