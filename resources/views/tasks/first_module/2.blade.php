@@ -81,7 +81,7 @@
                         <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                             @csrf
                             <div class="answer-options">
-                                @foreach(['Кинематика', 'Ядерная физика', 'Магнитное поле', 'Электродинамика'] as $option)
+                                @foreach(['Координата', 'Линза', 'Поляризация', 'Рычаг'] as $option)
                                 <label class="option-item">
                                     <input type="radio" name="answer" value="{{ $option }}" required>
                                     <span>{{ $option }}</span>

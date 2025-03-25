@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/app.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
+    <style>
+         .answer-block {
+                margin: 20px 0;
+            }
+
+            .answer-label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+                color: #374151;
+            }
+
+            .answer-input {
+                width: 100%;
+                padding: 12px 16px;
+                border: 2px solid #E5E7EB;
+                border-radius: 8px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                background: #FFFFFF;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            }
+
+            .answer-input:hover {
+                border-color: #9CA3AF;
+            }
+
+            .answer-input:focus {
+                outline: none;
+                border-color: #3B82F6;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            }
+
+            .answer-input::placeholder {
+                color: #9CA3AF;
+                opacity: 1;
+            }
+            .task-page {
+                margin-top: 20px;
+            }
+
+            .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }       
+
+            .alert.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+            .alert.error {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+    <body>
+        <div class="container">
+            <header class="header">
+            <div class="wrapper">
+                <div class="header__content">
+                    <nav class="header__navigation-container">
+                        <ul class="header__navigation-list">
+                            <li class="header__navigation-item">
+                                <a class="header__navigation-link" href="{{ route('welcome') }}">Главная</a>
+                            </li>
+                            <li class="header__navigation-item active">
+                                <a class="header__navigation-link" href="{{ route('catalog') }}">Каталог</a>
+                            </li>
+                            @auth
+                                    <li class="header__navigation-item">
+                                        <a class="header__navigation-link" href="{{ route('dashboard') }}">Личный кабинет</a>
+                                    </li>
+                                @else
+                                    <li class="header__navigation-item">
+                                        <a class="header__navigation-link" href="{{ route('register') }}">Вход/Регистрация</a>
+                                    </li>
+                                @endauth
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="wrapper">
+                <div class="task-page">
+                    <div class="task-header">
+                        <h1 class="task-title">{{ $task->name }}</h1>
+                    <div class="task-meta">
+                        <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                            Сложность: {{ $task->difficulty }}
+                        </span>
+                        <span class="task-points">
+                            Можно заработать: {{ $task->points }} очк.
+                        </span>
+                        @if(session('message'))
+                        <div class="alert {{ session('message_type') }}">
+                            {{ session('message') }}
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>Условие задания:</h3>
+                        <p>{{ $task->content }}</p>
+                    </div>
+                    <div class="image__container">
+                    <img src="{{ asset('images/tasks/1_1_3.jpg') }}" alt="Task Image">
+                    </div>
+                        <div class="task-answers">
+                            <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
+                                 @csrf
+                                 <div class="answer-block">
+                                    <label class="answer-label">Введите ваш ответ:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answer"
+                                        class="answer-input"
+                                        placeholder="Пример: 9.8 Н"
+                                        required
+                                        autocomplete="off"
+                                    >
+                                </div>
+
+                                @if(session('success'))
+                                    <div class="alert success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert error">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+                                                               
+
+                                @auth
+                                    <div class="task-actions">
+                                        <button type="submit" class="btn-check">Проверить</button>
+                                        @if(isset($nextTask))
+                                        <a href="{{ route('tasks.show', $nextTask) }}" class="btn-next">Следующее задание</a>
+                                        @endif
+                                    </div>
+                                @else
+                                    <div class="auth-alert">
+                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                    </div>
+                                @endauth
+                                </form>
+                        </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -6,18 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Task;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    public function tasks()
-    {
-        return $this->belongsToMany(Task::class)
-                ->withPivot('completed')
-                ->withTimestamps();
-    }   
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +24,25 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function show(User $user)
+    {
+        $this->authorize('view', $user);
+        return view('profile.show', compact('user'));
+    }
+
+    public function edit(User $user)
+    {
+        $this->authorize('update', $user);
+        return view('profile.edit', compact('user'));
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_user')
+            ->withPivot('is_correct')
+            ->withTimestamps();
+    }
 
     /**
      * The attributes that should be hidden for serialization.

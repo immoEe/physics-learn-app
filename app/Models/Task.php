@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Topic;
+use App\Models\User;
 
 class Task extends Model
 {
@@ -12,21 +13,13 @@ class Task extends Model
         return $this->belongsTo(Topic::class);
     }
 
-    protected $fillable = ['correct_answer']; 
+    protected $guarded = false;
 
     public function users()
     {
-        return $this->belongsToMany(User::class)
-            ->withPivot(['user_answer', 'is_correct'])
+        return $this->belongsToMany(User::class, 'task_user')
+            ->withPivot('is_correct', 'user_answer')
             ->withTimestamps();
-    }
-
-    public function isCompletedBy(User $user)
-    {
-        return $this->users()
-            ->where('user_id', $user->id)
-            ->where('is_correct', true)
-            ->exists();
     }
     
 }

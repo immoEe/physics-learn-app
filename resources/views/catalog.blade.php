@@ -55,7 +55,7 @@
                             <div class="topics-container">
                                 @foreach($section->topics as $topic)
                                     <div class="topic-item">
-                                        <a href="{{ route($topic->{'tasks-list-name'}, $topic) }}" 
+                                        <a href="{{ route('topics.show', ['section' => $section->id, 'topic' => $topic->id]) }}" 
                                            class="topic-link">
                                             <span class="topic-number">{{ $section->order }}.{{ $topic->order }}</span>
                                             <span class="topic-title">{{ $topic->title }}</span>

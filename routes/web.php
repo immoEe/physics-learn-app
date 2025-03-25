@@ -15,11 +15,13 @@ Route::get('/', function () {
 
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
 
-Route::get('/topics/{topic}/tasks', [TaskController::class, 'index'])
-    ->name('tasks-list.tasks-1_1');
+Route::get('/tasks/first_module/{task}', [CatalogController::class, 'showTask'])
+    ->name('tasks.show');
 
-    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
-    Route::post('/tasks/{task}/check', [TaskController::class, 'check'])
+Route::get('/catalog/{section}/{topic}', [CatalogController::class, 'showTopic'])->name('topics.show');
+
+
+Route::post('/tasks/{task}/check', [TaskController::class, 'check'])
     ->middleware('auth')
     ->name('tasks.check');
 
@@ -29,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/tasks/{task}/check', [TaskController::class, 'check'])
     ->name('tasks.check');
 });
+
+
 
 
 require __DIR__.'/auth.php';
