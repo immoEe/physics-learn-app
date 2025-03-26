@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+
+    public function __construct(private ProfileService $rank) {}
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -22,10 +26,11 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function show()
+    public function show(User $user)
     {
+        $userRank = $this->rank->rank($user);
         $user = Auth::user();
-        return view('dashboard', compact('user'));
+        return view('dashboard', compact('user', 'userRank'));
     }
 
     /**

@@ -23,19 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'points',
+        'rank'
     ];
-
-    public function show(User $user)
-    {
-        $this->authorize('view', $user);
-        return view('profile.show', compact('user'));
-    }
-
-    public function edit(User $user)
-    {
-        $this->authorize('update', $user);
-        return view('profile.edit', compact('user'));
-    }
 
     public function tasks()
     {

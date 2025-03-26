@@ -62,13 +62,13 @@
                         <div class="rank-panel">
                             <div class="rank-progress">
                                 <span class="rank-label">Ваш ранг:</span>
-                                <span class="rank-name">{{ $user->rank }}</span>
+                                <span class="rank-name">{{ $userRank }}</span>
                                 <progress 
                                     class="rank-progress-bar" 
                                     value="{{ $user->points }}" 
-                                    max="10000"
+                                    max="1000"
                                 ></progress>
-                                <span class="rank-points">{{ $user->points }}/10000 очк.</span>
+                                <span class="rank-points">{{ $user->points }}/1000 очк.</span>
                             </div>
 
                         </div>

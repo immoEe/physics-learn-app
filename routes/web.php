@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\RankController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatalogController;
 
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+
 
 Route::get('/', function () {
     return view('welcome');
