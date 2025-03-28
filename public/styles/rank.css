@@ -44,17 +44,16 @@
 .ranking__list {
     margin: 0;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr; /* Один столбец */
     gap: 10px;
     list-style: none;
 }
 
 .ranking__item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: transform 0.2s ease;
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    align-items: center; 
 }
 
 .ranking__item:last-child {

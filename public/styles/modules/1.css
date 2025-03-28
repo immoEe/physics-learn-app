@@ -250,14 +250,12 @@ color: #991b1b;
     order: 2; /* Центрируем кнопку проверки */
 }
 
-.btn-next {
-    margin-left: auto; /* Прижимаем к правому краю */
+.btn-next { /* Прижимаем к правому краю */
     order: 3;
 }
 
 /* Опционально: стилизация кнопок */
 .btn {
-    padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.3s;

@@ -30,6 +30,11 @@
                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             }
 
+            .btn-next {
+            margin: 0;
+            background-color: #FC4C00;
+        }
+
             .answer-input:hover {
                 border-color: #9CA3AF;
             }

@@ -48,6 +48,11 @@
                 margin-top: 20px;
             }
 
+            .btn-next {
+            margin: 0;
+            background-color: #FC4C00;
+        }
+
             .alert {
             padding: 12px;
             border-radius: 8px;

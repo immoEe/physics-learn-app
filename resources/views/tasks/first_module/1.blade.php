@@ -14,6 +14,11 @@
             margin: 15px 0;
             font-weight: 500;
         }
+        
+        .btn-next {
+            margin: 0;
+            background-color: #FC4C00;
+        }
 
         .alert.success {
             background: #d1fae5;

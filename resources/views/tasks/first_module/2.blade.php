@@ -20,6 +20,11 @@
             color: #065f46;
         }
 
+        .btn-next {
+            margin: 0;
+            background-color: #FC4C00;
+        }
+
         .alert.error {
             background: #fee2e2;
             color: #b91c1c;

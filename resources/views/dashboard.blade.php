@@ -10,6 +10,37 @@
         <link rel="stylesheet" href="{{asset('styles/app.css')}}">
         <link rel="stylesheet" href="{{asset('styles/rank.css')}}">
         <title>Learn Physics</title>
+        <style>
+            .ranking {
+                margin: 0 0 20px;
+            }
+            .profile-content {
+    padding: 20px 0 0;
+}
+            .main-wrapper {
+                display: flex;
+                flex-direction: column;
+            }
+            .ranking__list {
+    margin: 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr; /* Один столбец */
+    gap: 10px;
+    list-style: none;
+}
+
+.rank-panel {
+    padding: 20px;
+}
+
+.ranking__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Авто ширина для первой и последней колонки */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+        </style>
     </head>
     <body>
         <div class="container">
@@ -33,7 +64,7 @@
             </div>
         </header>
         <main class="main">
-        <div class="wrapper">
+        <div class="wrapper main-wrapper">
                     <div class="profile-content">
                         <h1 class="profile-title">Добро пожаловать, {{ Auth::user()->name }}!</h1>
                         <div class="rank-panel">
@@ -47,7 +78,10 @@
                                 ></progress>
                                 <span class="rank-points">{{ $user->points }}/1000 очк.</span>
                             </div>
-                            <div class="ranking">
+                        </div>
+
+                    </div>
+                    <div class="ranking">
         <div class="ranking__title-container">
             <h2 class="ranking-title">Топ пользователей</h2>
         </div>
@@ -77,11 +111,9 @@
             </ul>
         </div>
     </div>
-                        </div>
-
-                        <button class="logout-button" onclick="showLogoutModal()">Выйти из системы</button>
-                    </div>
+    <button class="logout-button" onclick="showLogoutModal()">Выйти из системы</button>
                 </div>
+                
         </main>
         <dialog id="logoutModal" class="logout-modal">
                 <div class="modal-content">
@@ -97,6 +129,6 @@
                 </div>
             </dialog>
         </div>
-        <script src='{{asset('js/ranks.js')}}'></script>
+        <script src="{{asset('js/ranks.js')}}"></script>
     </body>
 </html>
