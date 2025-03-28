@@ -164,8 +164,9 @@
 }
 
 .btn-next:hover {
-    background: #E5E7EB;
+    background: #b2b4b6;
 }
+
 
 .auth-alert {
     padding: 1.5rem;
@@ -230,4 +231,51 @@ color: #166534;
 .result-alert.error {
 background: #fee2e2;
 color: #991b1b;
+}
+
+.task-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.btn-prev {
+    margin-right: auto; /* Прижимаем к левому краю */
+    order: 1;
+}
+
+.btn-check {
+    order: 2; /* Центрируем кнопку проверки */
+}
+
+.btn-next {
+    margin-left: auto; /* Прижимаем к правому краю */
+    order: 3;
+}
+
+/* Опционально: стилизация кнопок */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-prev {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-next {
+    background: #007bff;
+    color: white;
+}
+
+.btn-check {
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
 }

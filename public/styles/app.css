@@ -62,7 +62,7 @@
 .rank-panel {
     background: #ffffff;
     border-radius: 12px;
-    padding: 24px;
+    width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
 }
@@ -102,6 +102,8 @@
     color: #888;
     text-align: right;
 }
+
+
 
 /* Logout Button */
 .logout-button {
@@ -293,3 +295,4 @@
     background-color: #fff;
     color: black;
 }
+

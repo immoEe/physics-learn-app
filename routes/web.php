@@ -20,6 +20,7 @@ Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog');
 Route::get('/tasks/first_module/{task}', [CatalogController::class, 'showTask'])
     ->name('tasks.show');
 
+
 Route::get('/catalog/{section}/{topic}', [CatalogController::class, 'showTopic'])->name('topics.show');
 
 

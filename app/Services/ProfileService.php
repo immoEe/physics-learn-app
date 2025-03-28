@@ -29,4 +29,17 @@ class ProfileService
 
         return $newRank;
     }
+
+    public function ranking() {
+        $users = User::all()->sortBydesc('points')->keyBy('name')->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'rank' => $user->rank,
+                'points' => $user->points
+            ];
+        })
+        ->toArray();
+
+        return $users;
+    }
 }

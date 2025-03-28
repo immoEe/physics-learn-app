@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
     <style>
          .answer-block {
                 margin: 20px 0;
@@ -144,21 +145,30 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                                               
 
+                                </form>
+                                <div class="task-actions">
+                                @if($previousTask)
+                                    <a href="{{ route('tasks.show', $previousTask) }}" 
+                                       class="btn btn-next">← Предыдущее задание</a>
+                                @endif
+
+                                @if($nextTask)
+                                    <a href="{{ route('tasks.show', $nextTask) }}" 
+                                       class="btn btn-next mod">Следующее задание →</a>
+                                @endif
+                        </div>
+
+                        
                                 @auth
-                                    <div class="task-actions">
-                                        <button type="submit" class="btn-check">Проверить</button>
-                                        @if(isset($nextTask))
-                                        <a href="{{ route('tasks.show', $nextTask) }}" class="btn-next">Следующее задание</a>
-                                        @endif
+                                <div class="btn-check_block">
+                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
                                     </div>
                                 @else
                                     <div class="auth-alert">
                                         <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
                                     </div>
                                 @endauth
-                                </form>
                         </div>
                 </div>
             </div>

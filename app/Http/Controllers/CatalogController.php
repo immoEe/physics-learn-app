@@ -19,14 +19,20 @@ class CatalogController extends Controller
     public function showTask(Task $task)
     {
         $nextTask = Task::where('id', '>', $task->id)
-        ->orderBy('id')
-        ->first();
+            ->orderBy('id')
+            ->first();
+
+        $previousTask = Task::where('id', '<', $task->id)
+            ->orderByDesc('id')
+            ->first();
 
         return view("tasks.first_module.{$task->id}", [
             'task' => $task,
-            'nextTask' => $nextTask
+            'nextTask' => $nextTask,
+            'previousTask' => $previousTask
         ]);
     }
+
     public function index()
     {
         $sections = Section::with(['topics' => function($query) {

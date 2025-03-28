@@ -8,31 +8,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
         <link rel="stylesheet" href="{{asset('styles/app.css')}}">
+        <link rel="stylesheet" href="{{asset('styles/rank.css')}}">
         <title>Learn Physics</title>
-        <style>
-        .rank-progress-bar {
-            width: 100%;
-            height: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #e0e0e0;
-        }
-        
-        .rank-progress-bar::-webkit-progress-value {
-            background: linear-gradient(90deg, #3B82F6 0%, #1D4ED8 100%);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-        
-        .rank-progress-bar::-webkit-progress-value {
-        background: var(--progress-color, #3B82F6);
-        }
-
-        .rank-progress-bar::-moz-progress-bar {
-            background: linear-gradient(90deg, #3B82F6 0%, #1D4ED8 100%);
-            border-radius: 10px;
-        }
-        </style>
     </head>
     <body>
         <div class="container">
@@ -70,7 +47,36 @@
                                 ></progress>
                                 <span class="rank-points">{{ $user->points }}/1000 очк.</span>
                             </div>
-
+                            <div class="ranking">
+        <div class="ranking__title-container">
+            <h2 class="ranking-title">Топ пользователей</h2>
+        </div>
+        <div class="ranking_content">
+            <ul class="ranking__list">
+                @foreach($users as $name => $userData)
+                <li class="ranking__item @if($userData['id'] === Auth::id()) current-user @endif">
+                    <div class="ranking__position">
+                        #{{ $loop->iteration }}
+                    </div>
+                    <div class="ranking__item-name">
+                        {{ $name }}
+                    </div>
+                    <div class="ranking__item-rank">
+                        {{ $userData['rank'] }}
+                    </div>
+                    <div class="ranking__item-points">
+                        <span>{{ number_format($userData['points'], 0, ',', ' ') }} очков</span>
+                        <div class="ranking__progress">
+                            <div class="ranking__progress-fill" 
+                                 style="width: {{ ($userData['points'] / 1000) * 100 }}%">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
                         </div>
 
                         <button class="logout-button" onclick="showLogoutModal()">Выйти из системы</button>
@@ -91,35 +97,6 @@
                 </div>
             </dialog>
         </div>
-        <script>
-            function showLogoutModal() {
-                document.getElementById('logoutModal').showModal();
-            }
-
-            function closeLogoutModal() {
-                document.getElementById('logoutModal').close();
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-            const progressBar = document.querySelector('.rank-progress-bar');
-            const progressValue = parseInt(progressBar.value);
-            const maxValue = parseInt(progressBar.max);
-            const percent = (progressValue / maxValue) * 100;
-
-            if(percent < 33) {
-                progressBar.style.setProperty('--progress-color', '#ef4444');
-            } else if(percent < 66) {
-                progressBar.style.setProperty('--progress-color', '#eab308');
-            } else {
-                progressBar.style.setProperty('--progress-color', '#22c55e');
-            }
-        });
-
-        function updateProgress(newPoints) {
-            const progressBar = document.querySelector('.rank-progress-bar');
-            progressBar.value = newPoints;
-            progressBar.nextElementSibling.textContent = `${newPoints}/1000 очк.`;
-        }
-        </script>
+        <script src='{{asset('js/ranks.js')}}'></script>
     </body>
 </html>

@@ -29,8 +29,10 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         $userRank = $this->rank->rank($user);
+        $users = $this->rank->ranking();
         $user = Auth::user();
-        return view('dashboard', compact('user', 'userRank'));
+    
+        return view('dashboard', compact('user', 'userRank', 'users'));
     }
 
     /**

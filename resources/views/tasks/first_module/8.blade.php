@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
     <style>
         .alert {
             padding: 12px;
@@ -23,6 +24,8 @@
             background: #fee2e2;
             color: #b91c1c;
         }
+
+        
     </style>
 </head>
     <body>
@@ -88,17 +91,29 @@
                                 </label>
                                 @endforeach
                             </div>                                                    
-                            @auth
-                                <div class="task-actions">
-                                <button type="submit" style="cursor: pointer" class="btn-check">Проверить</button>
-                                <a href="{{ route('tasks.show', $nextTask) }}" class="btn-next">Следующее задание</a>
-                            </div>
-                            @else
-                            <div class="auth-alert">
-                                <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
-                            </div>
-                            @endauth
                         </form>
+                        <div class="task-actions">
+                                @if($previousTask)
+                                    <a href="{{ route('tasks.show', $previousTask) }}" 
+                                       class="btn btn-next">← Предыдущее задание</a>
+                                @endif
+
+                                @if($nextTask)
+                                    <a href="{{ route('tasks.show', $nextTask) }}" 
+                                       class="btn btn-next mod">Следующее задание →</a>
+                                @endif
+                        </div>
+
+                        
+                                @auth
+                                <div class="btn-check_block">
+                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
+                                    </div>
+                                @else
+                                    <div class="auth-alert">
+                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                    </div>
+                                @endauth
                     </div>
                 </div>
             </div>
