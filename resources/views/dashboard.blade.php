@@ -10,37 +10,6 @@
         <link rel="stylesheet" href="{{asset('styles/app.css')}}">
         <link rel="stylesheet" href="{{asset('styles/rank.css')}}">
         <title>Learn Physics</title>
-        <style>
-            .ranking {
-                margin: 0 0 20px;
-            }
-            .profile-content {
-    padding: 20px 0 0;
-}
-            .main-wrapper {
-                display: flex;
-                flex-direction: column;
-            }
-            .ranking__list {
-    margin: 0;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr; /* Один столбец */
-    gap: 10px;
-    list-style: none;
-}
-
-.rank-panel {
-    padding: 20px;
-}
-
-.ranking__item {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; /* Авто ширина для первой и последней колонки */
-    align-items: center; /* Центрирование по вертикали */
-}
-
-        </style>
     </head>
     <body>
         <div class="container">

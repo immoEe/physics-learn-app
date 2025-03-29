@@ -5,31 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
-    <style>
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-weight: 500;
-        }
-        
-        .btn-next {
-            margin: 0;
-            background-color: #FC4C00;
-        }
-
-        .alert.success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .alert.error {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
 </head>
     <body>
         <div class="container">
@@ -103,7 +79,7 @@
 
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" 
-                                       class="btn btn-next mod">Следующее задание →</a>
+                                       class="btn btn-next">Следующее задание →</a>
                                 @endif
                         </div>
 

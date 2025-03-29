@@ -16,6 +16,10 @@
     background-color: #FC4C00;
 }
 
+.profile-content {
+    padding: 20px 0 0;
+}
+
 .rank-progress-bar::-moz-progress-bar {
     background-color: #FC4C00;
     border-radius: 10px;
@@ -26,7 +30,12 @@
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    margin-top: 2rem;
+    margin: 0 0 20px;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .ranking__title-container {
@@ -41,18 +50,22 @@
     font-weight: 600;
 }
 
+.rank-panel {
+    padding: 20px;
+}
+
 .ranking__list {
     margin: 0;
     padding: 10px;
     display: grid;
-    grid-template-columns: 1fr; /* Один столбец */
+    grid-template-columns: 1fr; 
     gap: 10px;
     list-style: none;
 }
 
 .ranking__item {
     display: grid;
-    grid-template-columns: 1fr auto; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center; 
 }
 
@@ -139,7 +152,8 @@
     transition: width 0.5s ease;
 }
 
-/* Адаптивность */
+
+
 @media (max-width: 768px) {
     .ranking__item {
         grid-template-columns: 40px 1fr 1fr;

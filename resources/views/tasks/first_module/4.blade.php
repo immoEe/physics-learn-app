@@ -7,65 +7,6 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
-    <style>
-        .drag-drop-table {
-            width: 100%;
-            margin: 2rem 0;
-            border-collapse: collapse;
-        }
-
-        .body {
-            font-family: Inter;
-        }
-
-        .drag-drop-table td {
-            padding: 1rem;
-            border: 2px solid #E5E7EB;
-        }
-
-        .drop-zone {
-            min-width: 120px;
-            min-height: 50px;
-            background: #F9FAFB;
-            transition: all 0.3s;
-        }
-
-        .drag-items-container {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin: 2rem 0;
-        }
-
-        .drag-item {
-            padding: 12px 20px;
-            background: white;
-            border: 2px solid #3B82F6;
-            border-radius: 6px;
-            cursor: move;
-            user-select: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .btn-next {
-            margin: 0;
-            background-color: #FC4C00;
-        }
-
-        .drag-item.dragging {
-            opacity: 0.5;
-        }
-
-        .drop-zone.hovered {
-            background: #EFF6FF;
-            border-color: #3B82F6;
-        }
-
-        .task-page { margin-top: 20px; }
-        .alert { padding:12px; border-radius:8px; margin:15px 0; font-weight:500; }
-        .alert.success { background:#d1fae5; color:#065f46; }
-        .alert.error { background:#fee2e2; color:#b91c1c; }
-    </style>
 </head>
 <body>
     <div class="container">

@@ -5,71 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
-    <style>
-         .answer-block {
-                margin: 20px 0;
-            }
-
-            .answer-label {
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 500;
-                color: #374151;
-            }
-
-            .answer-input {
-                width: 100%;
-                padding: 12px 16px;
-                border: 2px solid #E5E7EB;
-                border-radius: 8px;
-                font-size: 16px;
-                transition: all 0.3s ease;
-                background: #FFFFFF;
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            }
-
-            .btn-next {
-            margin: 0;
-            background-color: #FC4C00;
-        }
-
-            .answer-input:hover {
-                border-color: #9CA3AF;
-            }
-
-            .answer-input:focus {
-                outline: none;
-                border-color: #3B82F6;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-            }
-
-            .answer-input::placeholder {
-                color: #9CA3AF;
-                opacity: 1;
-            }
-            .task-page {
-                margin-top: 20px;
-            }
-
-            .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-weight: 500;
-        }       
-
-            .alert.success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-            .alert.error {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
 </head>
     <body>
         <div class="container">
