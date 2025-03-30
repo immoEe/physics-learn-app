@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.css')}}">
-    <link rel="stylesheet" href="{{asset('styles/modules/1.1.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
 </head>
 <body>
     <div class="container">
@@ -38,6 +37,21 @@
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
+                <div class="task-header">
+                        <h1 class="task-title">{{ $task->name }}</h1>
+                    <div class="task-meta">
+                        <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                            Сложность: {{ $task->difficulty }}
+                        </span>
+                        <span class="task-points">
+                            Можно заработать: {{ $task->points }} очк.
+                        </span>
+                        @if(session('message'))
+                        <div class="alert {{ session('message_type') }}">
+                            {{ session('message') }}
+                        </div>
+                        @endif
+                    </div>
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
