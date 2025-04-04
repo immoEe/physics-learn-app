@@ -7,12 +7,43 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
-        
+        .phenomenon-container {
+            margin: 25px 0;
+        }
+        .phenomenon-description {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        .options-container {
+            margin-top: 20px;
+        }
+        .option-item {
+            display: block;
+            margin: 12px 0;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-item:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        .option-item input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+        }
     </style>
 </head>
-    <body>
-        <div class="container">
-            <header class="header">
+<body>
+    <div class="container">
+        <header class="header">
             <div class="wrapper">
                 <div class="header__content">
                     <nav class="header__navigation-container">
@@ -24,78 +55,99 @@
                                 <a class="header__navigation-link" href="{{ route('catalog') }}">Каталог</a>
                             </li>
                             @auth
-                                    <li class="header__navigation-item">
-                                        <a class="header__navigation-link" href="{{ route('dashboard') }}">Личный кабинет</a>
-                                    </li>
-                                @else
-                                    <li class="header__navigation-item">
-                                        <a class="header__navigation-link" href="{{ route('register') }}">Вход/Регистрация</a>
-                                    </li>
-                                @endauth
+                                <li class="header__navigation-item">
+                                    <a class="header__navigation-link" href="{{ route('dashboard') }}">Личный кабинет</a>
+                                </li>
+                            @else
+                                <li class="header__navigation-item">
+                                    <a class="header__navigation-link" href="{{ route('register') }}">Вход/Регистрация</a>
+                                </li>
+                            @endauth
                         </ul>
                     </nav>
                 </div>
             </div>
         </header>
+        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
                     <div class="task-header">
                         <h1 class="task-title">{{ $task->name }}</h1>
-                    <div class="task-meta">
-                        <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
-                            Сложность: {{ $task->difficulty }}
-                        </span>
-                        <span class="task-points">
-                            Можно заработать: {{ $task->points }} очк.
-                        </span>
-                        @if(session('message'))
-                        <div class="alert {{ session('message_type') }}">
-                            {{ session('message') }}
+                        <div class="task-meta">
+                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                Сложность: {{ $task->difficulty }}
+                            </span>
+                            <span class="task-points">
+                                Можно заработать: {{ $task->points }} очк.
+                            </span>
+                            @if(session('message'))
+                            <div class="alert {{ session('message_type') }}">
+                                {{ session('message') }}
+                            </div>
+                            @endif
                         </div>
-                        @endif
                     </div>
-                </div>
 
-                <div class="task-content">
-                    <div class="task-description">
-                        <h3>Условие задания:</h3>
-                        <p>{{ $task->content }}</p>
-                    </div>
-                    <div class="task-answers">
-                        <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
-                            @csrf
-                            <div class="answer-options">
-                                @foreach(['Физическое явление', 'Биологическое явление', 'Химическое явление'] as $option)
-                                <label class="option-item">
-                                    <input type="radio" name="answers[]" value="{{ $option }}" required>
-                                    <span>{{ $option }}</span>
-                                </label>
-                                @endforeach
-                            </div>                                                   
-                        </form>
-                        <div class="task-actions">
+                    <div class="task-content">
+                        <div class="task-description">
+                            <h3>Условие задания:</h3>
+                            <p>{{ $task->content }}</p>
+                        </div>
+                        
+                        <div class="task-answers">
+                            <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
+                                @csrf
+                                
+                                <div class="phenomenon-container">
+                                    
+                                    <div class="options-container">
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="физическое явление" required>
+                                            <span>физическое явление</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="биологическое явление" required>
+                                            <span>биологическое явление</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="химическое явление" required>
+                                            <span>химическое явление</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                @if(session('success'))
+                                    <div class="alert success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert error">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+                            </form>
+                            
+                            <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" 
-                                       class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)
-                                    <a href="{{ route('tasks.show', $nextTask) }}" 
-                                       class="btn btn-next">Следующее задание →</a>
+                                    <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
+                            </div>
+                            
+                            @auth
+                                <div class="btn-check_block">
+                                    <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
+                                </div>
+                            @else
+                                <div class="auth-alert">
+                                    <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                </div>
+                            @endauth
                         </div>
-
-                        
-                                @auth
-                                    <div class="btn-check_block">
-                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
-                                    </div>
-                                @else
-                                    <div class="auth-alert">
-                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
-                                    </div>
-                                @endauth
                     </div>
                 </div>
             </div>

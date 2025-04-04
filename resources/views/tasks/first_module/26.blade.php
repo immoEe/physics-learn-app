@@ -7,22 +7,26 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
-        .answer-input {
-            width: 80px;
-            display: inline-block;
-            margin: 0 10px;
-            text-align: center;
-        }
-        .units {
-            display: inline-block;
-            margin-right: 15px;
+        .conversion-container {
+            margin: 20px 0;
         }
         .conversion-item {
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
-        .main-unit-input {
+        .conversion-value {
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .answer-input {
             width: 120px;
             text-align: center;
+            margin: 0 10px;
+        }
+        .units {
+            min-width: 30px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -77,38 +81,37 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Вырази в других единицах измерения.</p>
+                            <p>{{ $task->content }} (численную и дробную часть раздели запятой)</p>
                         </div>
                         
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 
-                                <div class="conversion-item">
-                                    <label>1 ч = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">мин</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="conversion-item">
-                                    <label>8 ч = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">с</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="conversion-item">
-                                    <label>33 мин = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">с</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="conversion-item">
-                                    <label>Что является основной единицей времени? Ответ (запиши единицу измерения в СИ): 
-                                        <input type="text" name="answers[]" class="answer-input" required>
-                                    </label>
+                                <div class="conversion-container">
+                                    <div class="conversion-item">
+                                        <span>162,3 см =</span>
+                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
+                                        <span class="units">мм</span>
+                                    </div>
+                                    
+                                    <div class="conversion-item">
+                                        <span>30132,67 см =</span>
+                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
+                                        <span class="units">дм</span>
+                                    </div>
+                                    
+                                    <div class="conversion-item">
+                                        <span>10057,65 см =</span>
+                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
+                                        <span class="units">м</span>
+                                    </div>
+                                    
+                                    <div class="conversion-item">
+                                        <span>745144,04 см =</span>
+                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
+                                        <span class="units">км</span>
+                                    </div>
                                 </div>
                                 
                                 @if(session('success'))

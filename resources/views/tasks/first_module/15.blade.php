@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        
-    </style>
 </head>
     <body>
         <div class="container">
@@ -62,33 +59,48 @@
                         <h3>Условие задания:</h3>
                         <p>{{ $task->content }}</p>
                     </div>
-                    <div class="task-answers">
-                        <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
-                            @csrf
-                            <div class="answer-options">
-                                @foreach(['микромир', 'макромир', 'мегамир'] as $option)
-                                <label class="option-item">
-                                    <input type="radio" name="answers[]" value="{{ $option }}" required>
-                                    <span>{{ $option }}</span>
-                                </label>
-                                @endforeach
-                            </div>                                                   
-                        </form>
-                        <div class="task-actions">
+                    <div class="image__container">
+                    </div>
+                        <div class="task-answers">
+                            <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
+                                 @csrf
+                                 <div class="answer-block">
+                                    <label class="answer-label">Введите ваш ответ:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]"
+                                        class="answer-input"
+                                        placeholder="Пример: микромир"
+                                        required
+                                        autocomplete="off"
+                                    >
+                                </div>
+
+                                @if(session('success'))
+                                    <div class="alert success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert error">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif                                                    
+                                </form>
+                                <div class="task-actions">
                                 @if($previousTask)
                                     <a href="{{ route('tasks.show', $previousTask) }}" 
-                                       class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                       class="btn btn-next">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" 
-                                       class="btn btn-next">Следующее задание →</a>
+                                       class="btn btn-next mod">Следующее задание →</a>
                                 @endif
                         </div>
 
                         
                                 @auth
-                                    <div class="btn-check_block">
+                                <div class="btn-check_block">
                                         <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
                                     </div>
                                 @else
@@ -96,7 +108,7 @@
                                         <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
                                     </div>
                                 @endauth
-                    </div>
+                        </div>
                 </div>
             </div>
         </main>

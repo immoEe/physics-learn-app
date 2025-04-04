@@ -69,10 +69,7 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Какой объём воды вмещает детский бассейн, длина которого 140 см, ширина — 130 см и высота — 60 см? Ответ запиши в единицах измерения объёма «ведро» (объём ведра — 10 л). (Ответ округли до целых.)</p>
-                        </div>
-                        <div class="image__container">
-                            <img src="{{ asset('images/tasks/1_2_6.jpg') }}" alt="Изображение эксперимента">
+                            <p>Велосипедист при езде по асфальтированной дороге проезжает расстояние 9,71 км и, повернув к берегу озера, проезжает по лесной дорожке ещё 311 метров. Какова длина общего пути велосипедиста в километрах?</p>
                         </div>
                         
                         <div class="task-answers">
@@ -81,8 +78,8 @@
                                 
                                 <div class="answer-block">
                                     <label>Ответ: 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">ведер (ведра, ведро)</span>
+                                        <input type="number" step="0.001" name="answers[]" class="answer-input" required>
+                                        <span class="units">км</span>
                                     </label>
                                 </div>
                                 

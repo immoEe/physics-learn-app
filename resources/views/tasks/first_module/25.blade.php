@@ -8,13 +8,18 @@
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
         .answer-input {
-            width: 120px;
+            width: 150px;
             display: inline-block;
             margin: 0 10px;
             text-align: center;
         }
         .units {
             display: inline-block;
+            margin-right: 15px;
+        }
+        .main-unit-input {
+            width: 200px;
+            text-align: center;
         }
     </style>
 </head>
@@ -69,7 +74,7 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Велосипедист при езде по асфальтированной дороге проезжает расстояние 9,71 км и, повернув к берегу озера, проезжает по лесной дорожке ещё 311 метров. Какова длина общего пути велосипедиста в километрах?</p>
+                            <p>{{$task->content}}</p>
                         </div>
                         
                         <div class="task-answers">
@@ -77,9 +82,9 @@
                                 @csrf
                                 
                                 <div class="answer-block">
-                                    <label>Ответ: 
-                                        <input type="number" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">км</span>
+                                    <label>Продолжительность осени равна 
+                                        <input type="text" name="answers[]" class="answer-input" required>
+                                        <span class="units">мин</span>
                                     </label>
                                 </div>
                                 

@@ -7,15 +7,36 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
+        .conversion-container {
+            margin: 25px 0;
+        }
+        .conversion-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
         .answer-input {
-            width: 120px;
-            display: inline-block;
-            margin-left: 10px;
+            width: 150px;
             text-align: center;
+            margin: 0 10px;
         }
         .units {
-            display: inline-block;
-            margin-left: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        sup {
+            vertical-align: super;
+            font-size: smaller;
         }
     </style>
 </head>
@@ -70,20 +91,38 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>В мерную колбу налили 245 см³ жидкости и опустили один из камней, изображённых на рисунке. Теперь уровень жидкости соответствует делению 255. Вычисли объём погружённого в жидкость камня.</p>
+                            <p>{{ $task->content }}</p>
+                            <p class="note">Ответы округляй до четырёх цифр после запятой</p>
                         </div>
-                        
-
                         
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 
-                                <div class="answer-block">
-                                    <label>Ответ: 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">см³</span>
-                                    </label>
+                                <div class="conversion-container">
+                                    <div class="conversion-item">
+                                        <div class="input-group">
+                                            <span>137 см<sup>2</sup> =</span>
+                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
+                                            <span class="units">м<sup>2</sup></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="conversion-item">
+                                        <div class="input-group">
+                                            <span>311 дм<sup>2</sup> =</span>
+                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
+                                            <span class="units">м<sup>2</sup></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="conversion-item">
+                                        <div class="input-group">
+                                            <span>98039 мм<sup>2</sup> =</span>
+                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
+                                            <span class="units">м<sup>2</sup></span>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 @if(session('success'))
@@ -99,7 +138,7 @@
                             
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn  btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)

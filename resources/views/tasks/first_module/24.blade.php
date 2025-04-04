@@ -8,14 +8,21 @@
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
         .answer-input {
-            width: 120px;
+            width: 80px;
             display: inline-block;
-            margin-left: 10px;
+            margin: 0 10px;
             text-align: center;
         }
         .units {
             display: inline-block;
-            margin-left: 5px;
+            margin-right: 15px;
+        }
+        .conversion-item {
+            margin-bottom: 15px;
+        }
+        .main-unit-input {
+            width: 120px;
+            text-align: center;
         }
     </style>
 </head>
@@ -70,19 +77,37 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>В мерную колбу налили 245 см³ жидкости и опустили один из камней, изображённых на рисунке. Теперь уровень жидкости соответствует делению 255. Вычисли объём погружённого в жидкость камня.</p>
+                            <p>Вырази в других единицах измерения.</p>
                         </div>
-                        
-
                         
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 
-                                <div class="answer-block">
-                                    <label>Ответ: 
+                                <div class="conversion-item">
+                                    <label>1 ч = 
                                         <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">см³</span>
+                                        <span class="units">мин</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="conversion-item">
+                                    <label>8 ч = 
+                                        <input type="number" name="answers[]" class="answer-input" required>
+                                        <span class="units">с</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="conversion-item">
+                                    <label>33 мин = 
+                                        <input type="number" name="answers[]" class="answer-input" required>
+                                        <span class="units">с</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="conversion-item">
+                                    <label>Что является основной единицей времени? Ответ (запиши единицу измерения в СИ): 
+                                        <input type="text" name="answers[]" class="answer-input" required>
                                     </label>
                                 </div>
                                 
@@ -99,7 +124,7 @@
                             
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn  btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)

@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'points',
-        'rank'
+        'rank',
+        'last_visited_task_id',
     ];
 
     public function tasks()
@@ -32,6 +33,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Task::class, 'task_user')
             ->withPivot('is_correct')
             ->withTimestamps();
+    }
+
+    public function lastVisitedTask()
+    {
+        return $this->belongsTo(Task::class, 'last_visited_task_id');
     }
 
     /**

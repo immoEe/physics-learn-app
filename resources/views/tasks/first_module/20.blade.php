@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
-        .select-wrapper {
-            margin: 20px 0;
+        .task-question {
+            margin-bottom: 25px;
         }
-        .select-answer {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-size: 16px;
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .answer-options {
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
+            <!-- Шапка (как в ваших примерах) -->
             <div class="wrapper">
                 <div class="header__content">
                     <nav class="header__navigation-container">
@@ -77,30 +78,43 @@
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 
-                                <!-- Первый вопрос - select -->
-                                <div class="select-wrapper">
-                                    <label>1. Измерения обычно проводят во время:</label>
-                                    <select name="answers[]" class="select-answer" required>
-                                        <option value="" disabled selected>Выберите вариант</option>
-                                        <option value="экспериментов">экспериментов</option>
-                                        <option value="наблюдений">наблюдений</option>
-                                        <option value="расчетов">расчетов</option>
-                                        <option value="анализа">анализа</option>
-                                    </select>
+                                <!-- Вопрос 1 -->
+                                <div class="task-question">
+                                    <div class="question-number">1. Допиши предложение.</div>
+                                    <p>Точность измерения тем больше, чем:</p>
+                                    
+                                    <div class="answer-options">
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="меньше цена деления" required>
+                                            <span>меньше цена деления</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="больше цена деления" required>
+                                            <span>больше цена деления</span>
+                                        </label>
+                                    </div>
                                 </div>
                                 
-                                <!-- Второй вопрос - checkbox -->
-                                <div class="answer-options">
-                                    <p>2. Отметь явления, для изучения которых обычно используют опыты:</p>
-                                    @foreach([
-                                        'стрелка компаса всегда указывает на север',
-                                        'скорость падения тел разной массы и разного размера с разной высоты различается'
-                                    ] as $option)
-                                    <label class="option-item">
-                                        <input type="checkbox" name="answers[]" value="{{ $option }}">
-                                        <span>{{ $option }}</span>
-                                    </label>
-                                    @endforeach
+                                <!-- Вопрос 2 -->
+                                <div class="task-question">
+                                    <div class="question-number">2. Длина ручки измеряется с помощью измерительной ленты, у которой цена деления равна 0,5 см.</div>
+                                    <p>В результате 7 измерений получено среднее значение длины ручки, равное 15 см. Выбери верный вариант записи результатов проведенного измерения ручки.</p>
+                                    <p><em>(Погрешность измерений прими равной цене деления.)</em></p>
+                                    
+                                    <div class="answer-options">
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="(15.0 ± 0.5) см" required>
+                                            <span>(15.0 ± 0.5) см</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="(15 ± 0.5) см" required>
+                                            <span>(15 ± 0.5) см</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="(15.0 ± 0.5) м" required>
+                                            <span>(15.0 ± 0.5) м</span>
+                                        </label>
+                                    </div>
                                 </div>
                                 
                                 @if(session('success'))

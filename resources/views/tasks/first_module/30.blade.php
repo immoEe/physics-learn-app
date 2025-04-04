@@ -7,15 +7,36 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
+        .question-container {
+            margin: 20px 0;
+        }
+        .question-item {
+            margin-bottom: 25px;
+        }
+        .answer-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
         .answer-input {
             width: 120px;
-            display: inline-block;
-            margin-left: 10px;
             text-align: center;
+            margin: 0 10px;
+        }
+        .unit-input {
+            width: 80px;
+            text-align: center;
+            margin-left: 10px;
         }
         .units {
             display: inline-block;
-            margin-left: 5px;
+            min-width: 40px;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -70,20 +91,47 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>В мерную колбу налили 245 см³ жидкости и опустили один из камней, изображённых на рисунке. Теперь уровень жидкости соответствует делению 255. Вычисли объём погружённого в жидкость камня.</p>
+                            <p>{{ $task->content }}</p>
                         </div>
-                        
-
                         
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 
-                                <div class="answer-block">
-                                    <label>Ответ: 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">см³</span>
-                                    </label>
+                                <div class="question-container">
+                                    <!-- Вопрос 1 -->
+                                    <div class="question-item">
+                                        <p>1. Сколько это в гектарах?</p>
+                                        <div class="answer-group">
+                                            <label>Ответ: 
+                                                <input type="number" step="0.001" name="answers[]" class="answer-input" required>
+                                                <span class="units">га</span>
+                                            </label>
+                                            <span class="note">(Ответ округли до тысячных!)</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Вопрос 2 -->
+                                    <div class="question-item">
+                                        <p>2. Вырази эту площадь в единицах СИ</p>
+                                        <div class="answer-group">
+                                            <label>Ответ: 
+                                                <input type="number" name="answers[]" class="answer-input" required>
+                                                <input type="text" name="answers[]" class="unit-input" required>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Вопрос 3 -->
+                                    <div class="question-item">
+                                        <p>3. Вычисли, какой длины участок земли, если его ширина 22 м</p>
+                                        <div class="answer-group">
+                                            <label>Ответ: 
+                                                <input type="number" name="answers[]" class="answer-input" required>
+                                                <span class="units">м</span>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 @if(session('success'))
@@ -99,7 +147,7 @@
                             
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn  btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)

@@ -10,12 +10,11 @@
         .answer-input {
             width: 120px;
             display: inline-block;
-            margin-left: 10px;
+            margin: 0 10px;
             text-align: center;
         }
         .units {
             display: inline-block;
-            margin-left: 5px;
         }
     </style>
 </head>
@@ -70,10 +69,11 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>В мерную колбу налили 245 см³ жидкости и опустили один из камней, изображённых на рисунке. Теперь уровень жидкости соответствует делению 255. Вычисли объём погружённого в жидкость камня.</p>
+                            <p>Какой объём воды вмещает детский бассейн, длина которого 140 см, ширина — 130 см и высота — 60 см? Ответ запиши в единицах измерения объёма «ведро» (объём ведра — 10 л). (Ответ округли до целых.)</p>
                         </div>
-                        
-
+                        <div class="image__container">
+                            <img src="{{ asset('images/tasks/1_2_6.jpg') }}" alt="Изображение эксперимента">
+                        </div>
                         
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
@@ -82,7 +82,7 @@
                                 <div class="answer-block">
                                     <label>Ответ: 
                                         <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">см³</span>
+                                        <span class="units">ведер (ведра, ведро)</span>
                                     </label>
                                 </div>
                                 
@@ -99,7 +99,7 @@
                             
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn  btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)

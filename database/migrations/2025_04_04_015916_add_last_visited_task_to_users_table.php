@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('last_visited_task_id')->nullable()->after('remember_token');
+            $table->foreign('last_visited_task_id')->references('id')->on('tasks')->onDelete('set null');
         });
     }
 

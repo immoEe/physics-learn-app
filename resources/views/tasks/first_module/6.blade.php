@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
+    <style>
+                .select-wrapper {
+            margin: 20px 0;
+        }
+        .select-answer {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+    </style>
 </head>
     <body>
         <div class="container">
@@ -59,19 +71,42 @@
                         <h3>Условие задания:</h3>
                         <p>{{ $task->content }}</p>
                     </div>
-                    <div class="task-answers">
-                        <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
-                            @csrf
-                            <div class="answer-options">
-                                @foreach(['Плавание кораблей', 'Давление колеса на дорогу', 'Разряд молнии', 'Короткое замыкание'] as $option)
-                                <label class="option-item">
-                                    <input type="checkbox" name="answers[]" value="{{ $option }}">
-                                    <span>{{ $option }}</span>
-                                </label>
-                                @endforeach
-                            </div>                                                    
-                        </form>
-                        <div class="task-actions">
+                    <div class="image__container">
+                    <img src="{{ asset('images/tasks/1_1_7.jpg') }}" alt="Task Image">
+                    </div>
+                        <div class="task-answers">
+                            <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
+                                 @csrf
+                                 <div class="answer-block">
+                                    <label class="answer-label">Ответ</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]"
+                                        class="answer-input"
+                                        placeholder="Пример: Каледоскоп"
+                                        required
+                                        autocomplete="off"
+                                    > 
+                                    <label style="margin-top: 20px" class="answer-label">используют для измерения:</label>
+                                    <select name="answers[]" class="select-answer" required>
+                                        <option value="1">Силы тока</option>
+                                        <option value="2">напряжения</option>
+                                        <option value="3">Силы</option>
+                                        <option value="4">Объема</option>
+                                    </select>
+                                </div>
+
+                                @if(session('success'))
+                                    <div class="alert success">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert error">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif                                                    
+                                </form>
+                                <div class="task-actions">
                                 @if($previousTask)
                                     <a href="{{ route('tasks.show', $previousTask) }}" 
                                        class="btn btn-next">← Предыдущее задание</a>
@@ -93,7 +128,7 @@
                                         <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
                                     </div>
                                 @endauth
-                    </div>
+                        </div>
                 </div>
             </div>
         </main>

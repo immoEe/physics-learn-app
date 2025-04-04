@@ -18,12 +18,12 @@ class TaskService
             return mb_strtolower(str_replace(' ', '', $answer));
         }, $userData->answers);
 
-        // dd($userAnswers);
         $userAnswerString = implode('|', $userAnswers);
 
         $correctAnswer = mb_strtolower(str_replace(' ', '', $task->correct_answers));
 
         $isCorrect = ($correctAnswer === $userAnswerString);
+
 
         if ($isCorrect && !$user->tasks()->where('task_id', $task->id)->wherePivot('is_correct', 1)->exists()) {
             $user->increment('points');
