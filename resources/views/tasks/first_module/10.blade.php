@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
+    <style>
+        
+    </style>
 </head>
     <body>
         <div class="container">
@@ -63,29 +66,29 @@
                         <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                             @csrf
                             <div class="answer-options">
-                                @foreach(['Плавание кораблей', 'Давление колеса на дорогу', 'Разряд молнии', 'Короткое замыкание'] as $option)
+                                @foreach(['Тело', 'Невозможно определить', 'Явление', 'Вещество'] as $option)
                                 <label class="option-item">
-                                    <input type="checkbox" name="answers[]" value="{{ $option }}">
+                                    <input type="radio" name="answers[]" value="{{ $option }}" required>
                                     <span>{{ $option }}</span>
                                 </label>
                                 @endforeach
-                            </div>                                                    
+                            </div>                                                   
                         </form>
                         <div class="task-actions">
                                 @if($previousTask)
                                     <a href="{{ route('tasks.show', $previousTask) }}" 
-                                       class="btn btn-next">← Предыдущее задание</a>
+                                       class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" 
-                                       class="btn btn-next mod">Следующее задание →</a>
+                                       class="btn btn-next">Следующее задание →</a>
                                 @endif
                         </div>
 
                         
                                 @auth
-                                <div class="btn-check_block">
+                                    <div class="btn-check_block">
                                         <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
                                     </div>
                                 @else

@@ -63,13 +63,26 @@
                         <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                             @csrf
                             <div class="answer-options">
-                                @foreach(['Плавание кораблей', 'Давление колеса на дорогу', 'Разряд молнии', 'Короткое замыкание'] as $option)
-                                <label class="option-item">
-                                    <input type="checkbox" name="answers[]" value="{{ $option }}">
-                                    <span>{{ $option }}</span>
-                                </label>
-                                @endforeach
-                            </div>                                                    
+    @foreach([
+        'молния',
+        'мурлыкание кошки', 
+        'свинец плавится',
+        'вода кипит',
+        'снег тает',
+        'холодает',
+        'наступает рассвет',
+        'плывёт бревно',
+        'шар катится',
+        'звёзды мерцают',
+        'горит люминесцентная лампа',
+        'слышны раскаты грома'
+    ] as $option)
+    <label class="option-item">
+        <input type="checkbox" name="answers[]" value="{{ $option }}">
+        <span>{{ $option }}</span>
+    </label>
+    @endforeach
+</div>                               
                         </form>
                         <div class="task-actions">
                                 @if($previousTask)

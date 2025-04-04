@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
+    <style>
+    </style>
 </head>
     <body>
         <div class="container">
@@ -60,21 +62,28 @@
                         <p>{{ $task->content }}</p>
                     </div>
                     <div class="image__container">
-                    <img src="{{ asset('images/tasks/1_1_3.jpg') }}" alt="Task Image">
+                    <img src="{{ asset('images/tasks/1_1_7.jpg') }}" alt="Task Image">
                     </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                  @csrf
                                  <div class="answer-block">
-                                    <label class="answer-label">Введите ваш ответ:</label>
+                                    <label class="answer-label">Ответ</label>
                                     <input 
                                         type="text" 
-                                        name="answer"
+                                        name="answers[]"
                                         class="answer-input"
-                                        placeholder="Пример: 9.8 Н"
+                                        placeholder="Пример: Каледоскоп"
                                         required
                                         autocomplete="off"
-                                    >
+                                    > 
+                                    <label style="margin-top: 20px" class="answer-label">используют для измерения:</label>
+                                    <select name="answers[]" required>
+                                        <option value="1">Силы тока</option>
+                                        <option value="2">напряжения</option>
+                                        <option value="3">Силы</option>
+                                        <option value="4">Объема</option>
+                                    </select>
                                 </div>
 
                                 @if(session('success'))
@@ -85,8 +94,7 @@
                                     <div class="alert error">
                                         {{ session('error') }}
                                     </div>
-                                @endif
-
+                                @endif                                                    
                                 </form>
                                 <div class="task-actions">
                                 @if($previousTask)

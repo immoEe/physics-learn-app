@@ -41,7 +41,28 @@
         <main class="main">
         <div class="wrapper">
             <div class="tasks-content">
-                <h1 class="tasks-title">work in progress</h1>
+                <h1 class="tasks-title">Задания</h1>
+                
+                <div class="tasks-list">
+                    @foreach($tasks as $task)
+                    <div class="task-item">
+                        <a href="{{ route('tasks.show', $task) }}" class="task-link">
+                            <div class="task-header">
+                                <span class="task-number">{{ $loop->iteration }}.</span>
+                                <h2 class="task-name">{{ $task->name }}</h2>
+                            </div>
+                            <div class="task-meta">
+                                <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                    Сложность: {{ $task->difficulty }}
+                                </span>
+                                <span class="task-points">
+                                    {{ $task->points }} очк.
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </main>

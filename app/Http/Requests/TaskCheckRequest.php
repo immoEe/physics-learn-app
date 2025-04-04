@@ -19,10 +19,11 @@ class TaskCheckRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'answer' => 'required|string'
+            'answers' => 'required|array|min:1', 
+            'answers.*' => 'required|string',
         ];
     }
 }
