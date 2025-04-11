@@ -23,8 +23,6 @@ class TaskService
 
         $correctAnswer = mb_strtolower(str_replace(' ', '', $task->correct_answers));
 
-        dd($userAnswerString);
-
         $isCorrect = ($correctAnswer === $userAnswerString);
 
 
