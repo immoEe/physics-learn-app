@@ -11,50 +11,58 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $users = [
-            [
-                'name' => 'Новичок',
+            [   
+                'name' => 'Григорий',
+                'rank' => 'Новичок',
                 'email' => 'novice@example.com',
                 'password' => 'password',
                 'points' => 50
             ],
             [
-                'name' => 'Подмастерье',
+                'name' => 'Анна',
+                'rank' => 'Подмастерье',
                 'email' => 'apprentice1@example.com',
                 'password' => 'password',
                 'points' => 100
             ],
             [
-                'name' => 'Подмастерье',
+                'name' => 'Влада',
+                'rank' => 'Подмастерье',
                 'email' => 'apprentice2@example.com',
                 'password' => 'password',
                 'points' => 250
             ],
             [
-                'name' => 'Мастер',
+                'name' => 'Диана',
+                'rank' => 'Мастер',
                 'email' => 'master1@example.com',
                 'password' => 'password',
                 'points' => 251
             ],
             [
-                'name' => 'Мастер',
+                'name' => 'Марина',
+                'rank' => 'Мастер',
                 'email' => 'master2@example.com',
                 'password' => 'password',
                 'points' => 500
             ],
             [
-                'name' => 'Эксперт',
+                'name' => 'Даниил',
+                'rank' => 'Эксперт',
                 'email' => 'expert@example.com',
                 'password' => 'password',
                 'points' => 600
             ],
             [
-                'name' => 'Кандидат наук',
+                'name' => 'Дельфина',
+                'rank' => 'Кандидат наук',
                 'email' => 'candidate@example.com',
                 'password' => 'password',
                 'points' => 800
             ],
             [
-                'name' => 'Гуру',
+                'name' => 'Сергей',
+                'rank' => 'Гуру',
                 'email' => 'guru@example.com',
                 'password' => 'password',
                 'points' => 1000
