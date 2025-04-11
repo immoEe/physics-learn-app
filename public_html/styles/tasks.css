@@ -1,0 +1,87 @@
+.tasks-content {
+    padding: 40px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tasks-title {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+.tasks-list {
+    border-left: 3px solid #E2E8F0;
+    padding-left: 1.5rem;
+}
+
+.task-item {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+}
+
+.task-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.task-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.task-number {
+    font-weight: 600;
+    color: #4A5568;
+    min-width: 2rem;
+}
+
+.task-name {
+    font-size: 18px;
+    color: #2D3748;
+}
+
+.task-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.task-difficulty {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.difficulty-легко {
+    background: #e6f6ec;
+    color: #067a4c;
+}
+
+.difficulty-средне {
+    background: #fff4e6;
+    color: #cc5a00;
+}
+
+.difficulty-сложно {
+    background: #feeceb;
+    color: #d12929;
+}
+
+.task-points {
+    color: #718096;
+    font-weight: 500;
+}
