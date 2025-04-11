@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .answer-input {
-            width: 120px;
-            display: inline-block;
-            margin: 0 10px;
-            text-align: center;
-        }
-        .units {
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -45,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -65,45 +53,34 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Велосипедист при езде по асфальтированной дороге проезжает расстояние 9,71 км и, повернув к берегу озера, проезжает по лесной дорожке ещё 311 метров. Какова длина общего пути велосипедиста в километрах?</p>
+                            <p>{{ $task->content }}</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
                                 <div class="answer-block">
-                                    <label>Ответ: 
-                                        <input type="number" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">км</span>
-                                    </label>
+                                    <label class="answer-label">Ответ:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]" 
+                                        class="answer-input"
+                                        placeholder="Введите объем в см³"
+                                        required
+                                        autocomplete="off"
+                                    >
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

@@ -86,7 +86,7 @@
                 <div class="drag-item" draggable="true" data-value="10⁻¹⁸">10⁻¹⁸</div>
             </div>
 
-            <input type="hidden" name="answer" id="hidden-answer">
+            <input type="hidden" name="answers[]" id="hidden-answer">
             @if(session('message'))
                 <div class="alert {{ session('message_type') }}">
                     {{ session('message') }}

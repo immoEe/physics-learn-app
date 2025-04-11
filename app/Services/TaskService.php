@@ -18,9 +18,12 @@ class TaskService
             return mb_strtolower(str_replace(' ', '', $answer));
         }, $userData->answers);
 
+
         $userAnswerString = implode('|', $userAnswers);
 
         $correctAnswer = mb_strtolower(str_replace(' ', '', $task->correct_answers));
+
+        dd($userAnswerString);
 
         $isCorrect = ($correctAnswer === $userAnswerString);
 

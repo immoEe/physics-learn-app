@@ -6,22 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .answer-input {
-            width: 150px;
-            display: inline-block;
-            margin: 0 10px;
-            text-align: center;
-        }
-        .units {
-            display: inline-block;
-            margin-right: 15px;
-        }
-        .main-unit-input {
-            width: 200px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -50,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -70,45 +53,34 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>{{$task->content}}</p>
+                            <p>{{ $task->content }}</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
                                 <div class="answer-block">
-                                    <label>Продолжительность осени равна 
-                                        <input type="text" name="answers[]" class="answer-input" required>
-                                        <span class="units">мин</span>
-                                    </label>
+                                    <label class="answer-label">Ответ:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]" 
+                                        class="answer-input"
+                                        placeholder="Введите количество ведер"
+                                        required
+                                        autocomplete="off"
+                                    >
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

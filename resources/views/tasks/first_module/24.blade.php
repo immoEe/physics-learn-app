@@ -6,25 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .answer-input {
-            width: 80px;
-            display: inline-block;
-            margin: 0 10px;
-            text-align: center;
-        }
-        .units {
-            display: inline-block;
-            margin-right: 15px;
-        }
-        .conversion-item {
-            margin-bottom: 15px;
-        }
-        .main-unit-input {
-            width: 120px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -53,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -73,65 +53,34 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Вырази в других единицах измерения.</p>
+                            <p>В парке имеется пруд размером 13 м × 4 м. Сколько воды потребуется, чтобы заполнить пруд доверху?</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <div class="conversion-item">
-                                    <label>1 ч = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">мин</span>
-                                    </label>
+                                <div class="answer-block">
+                                    <label class="answer-label">Ответ:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]" 
+                                        class="answer-input"
+                                        placeholder="Введите объем воды в м³"
+                                        required
+                                        autocomplete="off"
+                                    >
                                 </div>
-                                
-                                <div class="conversion-item">
-                                    <label>8 ч = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">с</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="conversion-item">
-                                    <label>33 мин = 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">с</span>
-                                    </label>
-                                </div>
-                                
-                                <div class="conversion-item">
-                                    <label>Что является основной единицей времени? Ответ (запиши единицу измерения в СИ): 
-                                        <input type="text" name="answers[]" class="answer-input" required>
-                                    </label>
-                                </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

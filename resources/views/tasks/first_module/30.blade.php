@@ -7,36 +7,41 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
-        .question-container {
+        .conversion-container {
             margin: 20px 0;
         }
-        .question-item {
-            margin-bottom: 25px;
-        }
-        .answer-group {
+        .conversion-item {
             display: flex;
             align-items: center;
-            margin: 10px 0;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
-        .answer-input {
+        .conversion-input {
             width: 120px;
-            text-align: center;
-            margin: 0 10px;
+            padding: 8px 12px;
+            margin: 0 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: right;
+            background-color: #f9f9f9;
         }
-        .unit-input {
-            width: 80px;
-            text-align: center;
-            margin-left: 10px;
+        .unit-options {
+            margin-top: 25px;
         }
-        .units {
-            display: inline-block;
-            min-width: 40px;
+        .option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
         }
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
+        .option-item:hover {
+            background-color: #f0f0f0;
+        }
+        .option-item input {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -67,7 +72,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -87,74 +91,58 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
                             <p>{{ $task->content }}</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <div class="question-container">
-                                    <!-- Вопрос 1 -->
-                                    <div class="question-item">
-                                        <p>1. Сколько это в гектарах?</p>
-                                        <div class="answer-group">
-                                            <label>Ответ: 
-                                                <input type="number" step="0.001" name="answers[]" class="answer-input" required>
-                                                <span class="units">га</span>
-                                            </label>
-                                            <span class="note">(Ответ округли до тысячных!)</span>
-                                        </div>
+                                <div class="conversion-container">
+                                    <div class="conversion-item">
+                                        <span>91,61 м = </span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.001">
+                                        <span> см</span>
                                     </div>
-                                    
-                                    <!-- Вопрос 2 -->
-                                    <div class="question-item">
-                                        <p>2. Вырази эту площадь в единицах СИ</p>
-                                        <div class="answer-group">
-                                            <label>Ответ: 
-                                                <input type="number" name="answers[]" class="answer-input" required>
-                                                <input type="text" name="answers[]" class="unit-input" required>
-                                            </label>
-                                        </div>
+                                    <div class="conversion-item">
+                                        <span>159,43 м = </span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.001">
+                                        <span> мм</span>
                                     </div>
-                                    
-                                    <!-- Вопрос 3 -->
-                                    <div class="question-item">
-                                        <p>3. Вычисли, какой длины участок земли, если его ширина 22 м</p>
-                                        <div class="answer-group">
-                                            <label>Ответ: 
-                                                <input type="number" name="answers[]" class="answer-input" required>
-                                                <span class="units">м</span>
-                                            </label>
-                                        </div>
+                                    <div class="conversion-item">
+                                        <span>41661,21 м = </span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.001">
+                                        <span> км</span>
                                     </div>
                                 </div>
                                 
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
+                                <div class="unit-question">
+                                    <p>Какая из единиц является основной единицей длины в международной системе единиц (СИ)?</p>
+                                    <div class="unit-options">
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="1" required>
+                                            <span>метр</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="миллиметр">
+                                            <span>миллиметр</span>
+                                        </label>
+                                        <label class="option-item">
+                                            <input type="radio" name="answers[]" value="сантиметр">
+                                            <span>сантиметр</span>
+                                        </label>
                                     </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
+                                </div>
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

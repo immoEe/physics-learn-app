@@ -13,7 +13,7 @@ class CatalogController extends Controller
     public function showTopic(Section $section, Topic $topic)
     {
         $tasks = Task::where('topic_id', $topic->id)->orderBy('id')->get();
-        return view("tasks-list.tasks{$section->id}_{$topic->id}", compact('tasks'));
+        return view("tasks-list.tasks-list", compact('tasks'));
     }
 
     public function showTask(Task $task)

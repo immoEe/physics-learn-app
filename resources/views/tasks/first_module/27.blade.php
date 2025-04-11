@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -9,31 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .conversion-container {
-            margin: 20px 0;
-        }
-        .conversion-item {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .answer-input {
-            width: 150px;
-            text-align: center;
-            margin: 0 10px;
-        }
-        .units {
-            min-width: 40px;
-            display: inline-block;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -62,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -82,46 +53,43 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
                             <p>{{ $task->content }}</p>
-                            <p class="note">Ответы округляй до четырёх цифр после запятой</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <div class="conversion-container">
+                                <div class="conversion-block">
                                     <div class="conversion-item">
-                                        <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
-                                        <span class="units">мин.</span>
+                                        <span>17 ч = </span>
+                                        <input type="text" name="answers[]" class="conversion-input" value="1020" readonly>
+                                        <span> мин</span>
+                                    </div>
+                                    <div class="conversion-item">
+                                        <span>13 ч = </span>
+                                        <input type="text" name="answers[]" class="conversion-input" value="46800" readonly>
+                                        <span> с</span>
+                                    </div>
+                                    <div class="conversion-item">
+                                        <span>25 мин = </span>
+                                        <input type="text" name="answers[]" class="conversion-input" value="1500" readonly>
+                                    </div>
+                                    <div class="base-unit">
+                                        <span>Основная единица времени в СИ: </span>
+                                        <input type="text" name="answers[]" class="unit-input" placeholder="с" required>
                                     </div>
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

@@ -8,35 +8,43 @@
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
         .conversion-container {
-            margin: 25px 0;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .conversion-item {
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
-        .input-group {
-            display: flex;
-            align-items: center;
-        }
-        .answer-input {
+        .conversion-input {
             width: 150px;
-            text-align: center;
+            padding: 10px 12px;
             margin: 0 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: right;
+            background-color: #fff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
-        .units {
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
+        .conversion-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
         }
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
+        .unit-label {
+            font-weight: 500;
+            color: #495057;
         }
-        sup {
-            vertical-align: super;
-            font-size: smaller;
+        .task-description {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 6px;
         }
     </style>
 </head>
@@ -67,94 +75,62 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
                     <div class="task-header">
-                        <h1 class="task-title">{{ $task->name }}</h1>
+                        <h1 class="task-title">Преобразование единиц длины</h1>
                         <div class="task-meta">
-                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
-                                Сложность: {{ $task->difficulty }}
+                            <span class="task-difficulty difficulty-medium">
+                                Сложность: Средняя
                             </span>
                             <span class="task-points">
-                                Можно заработать: {{ $task->points }} очк.
+                                Можно заработать: 5 очк.
                             </span>
-                            @if(session('message'))
-                            <div class="alert {{ session('message_type') }}">
-                                {{ session('message') }}
-                            </div>
-                            @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>{{ $task->content }}</p>
-                            <p class="note">Ответы округляй до четырёх цифр после запятой</p>
+                            <p>Преобразуй данные единицы длины. <em>(Ответы округляй до четырёх цифр после запятой!)</em></p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
                                 <div class="conversion-container">
                                     <div class="conversion-item">
-                                        <div class="input-group">
-                                            <span>137 см<sup>2</sup> =</span>
-                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
-                                            <span class="units">м<sup>2</sup></span>
-                                        </div>
+                                        <span class="unit-label">2863,99 мм =</span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
+                                        <span class="unit-label">см</span>
                                     </div>
-                                    
                                     <div class="conversion-item">
-                                        <div class="input-group">
-                                            <span>311 дм<sup>2</sup> =</span>
-                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
-                                            <span class="units">м<sup>2</sup></span>
-                                        </div>
+                                        <span class="unit-label">2699,7 мм =</span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
+                                        <span class="unit-label">дм</span>
                                     </div>
-                                    
                                     <div class="conversion-item">
-                                        <div class="input-group">
-                                            <span>98039 мм<sup>2</sup> =</span>
-                                            <input type="number" step="0.0001" name="answers[]" class="answer-input" required>
-                                            <span class="units">м<sup>2</sup></span>
-                                        </div>
+                                        <span class="unit-label">1052,54 мм =</span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
+                                        <span class="unit-label">м</span>
+                                    </div>
+                                    <div class="conversion-item">
+                                        <span class="unit-label">481,74 мм =</span>
+                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
+                                        <span class="unit-label">км</span>
                                     </div>
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
-                            </form>
-                            
-                            <div class="task-actions">
-                                @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
-                                @endif
-
-                                @if($nextTask)
-                                    <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
-                                @endif
-                            </div>
-                            
-                            @auth
+                                <div class="task-actions">
+                                    @if($previousTask)
+                                        <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
+                                    @endif
+                                    @if($nextTask)
+                                        <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
+                                    @endif
+                                </div>
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
                                 </div>
-                            @else
-                                <div class="auth-alert">
-                                    <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
-                                </div>
-                            @endauth
+                            </form>
                         </div>
                     </div>
                 </div>

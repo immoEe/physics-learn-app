@@ -11,21 +11,41 @@ class CatalogSeeder extends Seeder
 {
     public function run()
     {
-        $section = Section::create([
-            'title' => 'Введение. Физика и методы научного познания',
-            'slug' => 'introduction',
-            'order' => 1
-        ]);
-
-        $topics = [
-            ['order' => 1, 'title' => 'Введение'],
-            ['order' => 2, 'title' => 'Макро- и микромир. Числа со степенью 10'],
-            ['order' => 3, 'title' => 'Наблюдения, опыты, измерения, гипотеза, эксперимент'],
-            ['order' => 4, 'title' => 'Физические величины. Международная система единиц']
+        $sections = [
+            [
+                'title' => 'Введение. Физика и методы научного познания',
+                'slug' => 'introduction',
+                'order' => 1,
+                'topics' => [
+                    ['order' => 1, 'title' => 'Введение'],
+                    ['order' => 2, 'title' => 'Макро- и микромир. Числа со степенью 10'],
+                    ['order' => 3, 'title' => 'Наблюдения, опыты, измерения, гипотеза, эксперимент'],
+                    ['order' => 4, 'title' => 'Физические величины. Международная система единиц']
+                ]
+            ],
+            [
+                'title' => 'Основы кинематики',
+                'slug' => 'kinematics-basics',
+                'order' => 2,
+                'topics' => [
+                    ['order' => 1, 'title' => 'Описание механического движения'],
+                    ['order' => 2, 'title' => 'Прямолинейное равномерное движение'],
+                    ['order' => 3, 'title' => 'Равнопеременное движение'],
+                    ['order' => 4, 'title' => 'Равномерное движение по окружности']
+                ]
+            ],
         ];
 
-        foreach ($topics as $topicData) {
-            $section->topics()->create($topicData);
+        foreach ($sections as $sectionData) {
+            $section = Section::create([
+                'title' => $sectionData['title'],
+                'slug' => $sectionData['slug'],
+                'order' => $sectionData['order']
+            ]);
+
+            foreach ($sectionData['topics'] as $topic) {
+                $section->topics()->create($topic);
+            }
         }
     }
 }

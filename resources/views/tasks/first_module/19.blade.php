@@ -6,18 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .select-wrapper {
-            margin: 20px 0;
-        }
-        .select-answer {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -46,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -66,64 +53,41 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
                             <p>{{ $task->content }}</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <!-- Первый вопрос - select -->
-                                <div class="select-wrapper">
-                                    <label>1. Измерения обычно проводят во время:</label>
-                                    <select name="answers[]" class="select-answer" required>
-                                        <option value="" disabled selected>Выберите вариант</option>
-                                        <option value="экспериментов">экспериментов</option>
-                                        <option value="наблюдений">наблюдений</option>
-                                        <option value="расчетов">расчетов</option>
-                                        <option value="анализа">анализа</option>
-                                    </select>
-                                </div>
-                                
-                                <!-- Второй вопрос - checkbox -->
                                 <div class="answer-options">
-                                    <p>2. Отметь явления, для изучения которых обычно используют опыты:</p>
-                                    @foreach([
-                                        'стрелка компаса всегда указывает на север',
-                                        'скорость падения тел разной массы и разного размера с разной высоты различается'
-                                    ] as $option)
                                     <label class="option-item">
-                                        <input type="checkbox" name="answers[]" value="{{ $option }}">
-                                        <span>{{ $option }}</span>
+                                        <input type="radio" name="answers[]" value="1">
+                                        <span>метод исследования некоторого явления в управляемых условиях</span>
                                     </label>
-                                    @endforeach
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="определенные действия, которые проводят для изучения того или иного явления">
+                                        <span>определенные действия, которые проводят для изучения того или иного явления</span>
+                                    </label>
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="1" required>
+                                        <span>предварительные догадки о том, как протекает явление</span>
+                                    </label>
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="концентрация внимания на познаваемых объектах с целью их изучения">
+                                        <span>концентрация внимания на познаваемых объектах с целью их изучения</span>
+                                    </label>
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

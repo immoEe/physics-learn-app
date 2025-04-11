@@ -38,13 +38,13 @@
             <div class="wrapper">
                 <div class="task-page">
                     <div class="task-header">
-                        <h1 class="task-title">Мир бактерий</h1>
+                        <h1 class="task-title">{{ $task->name }}</h1>
                         <div class="task-meta">
-                            <span class="task-difficulty difficulty-medium">
-                                Сложность: Средняя
+                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                Сложность: {{ $task->difficulty }}
                             </span>
                             <span class="task-points">
-                                Можно заработать: 2 очк.
+                                Можно заработать: {{ $task->points }} очк.
                             </span>
                             @if(session('message'))
                             <div class="alert {{ session('message_type') }}">
@@ -56,7 +56,8 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Отметь, к какому понятию относится <em>бактерия</em> (0,5... 5 · 10<sup>-6</sup> м):</p>
+                            <p>Укажи правильный ответ.</p>
+                            <p>1. Что называют веществом?</p>
                         </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
@@ -64,21 +65,17 @@
                                 <div class="answer-options">
                                     <label class="option-item">
                                         <input type="radio" name="answers[]" value="1" required>
-                                        <span>Микромир</span>
+                                        <span>Один из видов материи, из которого состоят все физические тела</span>
                                     </label>
                                     <label class="option-item">
-                                        <input type="radio" name="answers[]" value="метамир">
-                                        <span>Метамир</span>
-                                    </label>
-                                    <label class="option-item">
-                                        <input type="radio" name="answers[]" value="макромир">
-                                        <span>Макромир</span>
+                                        <input type="radio" name="answers[]" value="Сложные взаимосвязи в природе">
+                                        <span>Сложные взаимосвязи в природе</span>
                                     </label>
                                 </div>
                             </form>
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
                                 @endif
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>

@@ -69,7 +69,7 @@
                                     <label class="answer-label">Введите ваш ответ:</label>
                                     <input 
                                         type="text" 
-                                        name="answer"
+                                        name="answers[]"
                                         class="answer-input"
                                         placeholder="Пример: 9.8 Н"
                                         required

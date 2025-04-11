@@ -6,29 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .conversion-container {
-            margin: 20px 0;
-        }
-        .conversion-item {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .conversion-value {
-            margin: 0 10px;
-            font-weight: bold;
-        }
-        .answer-input {
-            width: 120px;
-            text-align: center;
-            margin: 0 10px;
-        }
-        .units {
-            min-width: 30px;
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -57,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -77,64 +53,36 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>{{ $task->content }} (численную и дробную часть раздели запятой)</p>
+                            <p>{{ $task->content }}</p>
                         </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <div class="conversion-container">
-                                    <div class="conversion-item">
-                                        <span>162,3 см =</span>
-                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">мм</span>
-                                    </div>
-                                    
-                                    <div class="conversion-item">
-                                        <span>30132,67 см =</span>
-                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">дм</span>
-                                    </div>
-                                    
-                                    <div class="conversion-item">
-                                        <span>10057,65 см =</span>
-                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">м</span>
-                                    </div>
-                                    
-                                    <div class="conversion-item">
-                                        <span>745144,04 см =</span>
-                                        <input type="text" step="0.001" name="answers[]" class="answer-input" required>
-                                        <span class="units">км</span>
-                                    </div>
+                                <div class="answer-block">
+                                    <label class="answer-label">Велосипедист проехал:</label>
+                                    <input 
+                                        type="number" 
+                                        name="answers[]" 
+                                        class="answer-input"
+                                        placeholder="Введите расстояние в км"
+                                        step="0.001"
+                                        min="0"
+                                        required
+                                        autocomplete="off"
+                                    >
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

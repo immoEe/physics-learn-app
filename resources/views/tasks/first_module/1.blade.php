@@ -74,7 +74,7 @@
                         <div class="task-actions">
                                 @if($previousTask)
                                     <a href="{{ route('tasks.show', $previousTask) }}" 
-                                       class="btn btn-prev">← Предыдущее задание</a>
+                                       class="btn btn-next">← Предыдущее задание</a>
                                 @endif
 
                                 @if($nextTask)

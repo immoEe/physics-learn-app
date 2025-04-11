@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .answer-input {
-            width: 120px;
-            display: inline-block;
-            margin: 0 10px;
-            text-align: center;
-        }
-        .units {
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -45,7 +34,6 @@
                 </div>
             </div>
         </header>
-        
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
@@ -65,48 +53,38 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Какой объём воды вмещает детский бассейн, длина которого 140 см, ширина — 130 см и высота — 60 см? Ответ запиши в единицах измерения объёма «ведро» (объём ведра — 10 л). (Ответ округли до целых.)</p>
+                            <p>{{ $task->content }}</p>
                         </div>
-                        <div class="image__container">
-                            <img src="{{ asset('images/tasks/1_2_6.jpg') }}" alt="Изображение эксперимента">
-                        </div>
-                        
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                
-                                <div class="answer-block">
-                                    <label>Ответ: 
-                                        <input type="number" name="answers[]" class="answer-input" required>
-                                        <span class="units">ведер (ведра, ведро)</span>
+                                <div class="answer-options">
+                                    <p>Погрешность измерений _____ цене деления шкалы измерительного прибора.</p>
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="меньше, чем" required>
+                                        <span>меньше, чем</span>
+                                    </label>
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="1">
+                                        <span>равна</span>
+                                    </label>
+                                    <label class="option-item">
+                                        <input type="radio" name="answers[]" value="больше, чем">
+                                        <span>больше, чем</span>
                                     </label>
                                 </div>
-                                
-                                @if(session('success'))
-                                    <div class="alert success">
-                                        {{ session('success') }}
-                                    </div>
-                                @elseif(session('error'))
-                                    <div class="alert error">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                             </form>
-                            
                             <div class="task-actions">
                                 @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next btn-prev">← Предыдущее задание</a>
+                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
                                 @endif
-
                                 @if($nextTask)
                                     <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                 @endif
                             </div>
-                            
                             @auth
                                 <div class="btn-check_block">
                                     <button type="submit" form="task-form" class="btn btn-check">Проверить</button>

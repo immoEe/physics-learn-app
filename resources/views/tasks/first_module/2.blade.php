@@ -65,7 +65,7 @@
                             <div class="answer-options">
                                 @foreach(['Координата', 'Линза', 'Поляризация', 'Рычаг'] as $option)
                                 <label class="option-item">
-                                    <input type="radio" name="answer" value="{{ $option }}" required>
+                                    <input type="radio" name="answers[]" value="{{ $option }}" required>
                                     <span>{{ $option }}</span>
                                 </label>
                                 @endforeach
