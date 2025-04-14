@@ -62,28 +62,29 @@
             @csrf
             <table class="drag-drop-table">
                 <tr>
-                    <td>Механическая работа</td>
+                    <td>
+                    Оптическая сила линзы</td>
                     <td class="drop-zone" data-target="Динамика"></td>
                 </tr>
                 <tr>
-                    <td>Сопротивление проводника</td>
+                    <td>Число нуклонов</td>
                     <td class="drop-zone" data-target="Электрофизика"></td>
                 </tr>
                 <tr>
-                    <td>Угол отражения луча</td>
+                    <td>Сила Лоренца</td>
                     <td class="drop-zone" data-target="Ядерная физика"></td>
                 </tr>
                 <tr>
-                    <td>Деффект массы</td>
+                    <td>Пройденный путь</td>
                     <td class="drop-zone" data-target="Оптика"></td>
                 </tr>
             </table>
 
             <div class="drag-items-container">
-                <div class="drag-item" draggable="true" data-value="Динамика">Динамика</div>
-                <div class="drag-item" draggable="true" data-value="Электрофизика">Электрофизика</div>
+                <div class="drag-item" draggable="true" data-value="Динамика">Оптика</div>
                 <div class="drag-item" draggable="true" data-value="Ядерная физика">Ядерная физика</div>
-                <div class="drag-item" draggable="true" data-value="Оптика">Оптика</div>
+                <div class="drag-item" draggable="true" data-value="Ядерная физика">Магнитное поле</div>
+                <div class="drag-item" draggable="true" data-value="Оптика">Кинематика</div>
             </div>
 
             <input type="hidden" name="answers[]" id="hidden-answer">

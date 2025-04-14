@@ -43,9 +43,9 @@
                                 <progress 
                                     class="rank-progress-bar" 
                                     value="{{ $user->points }}" 
-                                    max="1000"
+                                    max="70"
                                 ></progress>
-                                <span class="rank-points">{{ $user->points }}/1000 очк.</span>
+                                <span class="rank-points">{{ $user->points }}/70 очк.</span>
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                         <span>{{ number_format($userData['points'], 0, ',', ' ') }} очков</span>
                         <div class="ranking__progress">
                             <div class="ranking__progress-fill" 
-                                 style="width: {{ ($userData['points'] / 1000) * 100 }}%">
+                                 style="width: {{ ($userData['points'] / 10)}}%">
                             </div>
                         </div>
                     </div>

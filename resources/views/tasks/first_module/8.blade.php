@@ -65,7 +65,7 @@
                             <div class="answer-options">
                                 @foreach(['Закипание молока', 'Эхо в горах', 'Таяние мороженого', 'Плавание кораблей'] as $option)
                                 <label class="option-item">
-                                    <input type="checkbox" name="answers[]" value="{{ $option }}" required>
+                                    <input type="checkbox" name="answers[]" value="{{ $option }}">
                                     <span>{{ $option }}</span>
                                 </label>
                                 @endforeach

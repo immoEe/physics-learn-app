@@ -28,6 +28,14 @@ class User extends Authenticatable
         'last_visited_task_id',
     ];
 
+    public function hasSolved(Task $task): bool
+    {
+        return $this->tasks()
+            ->where('task_id', $task->id)
+            ->wherePivot('is_correct', true)
+            ->exists();
+    }
+
     public function tasks()
     {
         return $this->belongsToMany(Task::class, 'task_user')

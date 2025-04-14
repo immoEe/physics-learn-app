@@ -7,26 +7,47 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
     <style>
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
+        .displacement-container {
             margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        .displacement-figure {
+            margin: 20px auto;
             text-align: center;
+            font-style: italic;
+            color: #495057;
         }
-        .data-table th {
-            background-color: #f2f2f2;
-        }
-        .answer-select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
+        .displacement-input {
+            width: 150px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
             font-size: 16px;
-            margin-top: 15px;
+            text-align: center;
+            background-color: #fff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .displacement-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+        }
+        .btn-check {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .btn-check:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -69,63 +90,39 @@
                             <span class="task-points">
                                 Можно заработать: {{ $task->points }} очк.
                             </span>
-                            @if(session('message'))
-                            <div class="alert {{ session('message_type') }}">
-                                {{ session('message') }}
-                            </div>
-                            @endif
                         </div>
                     </div>
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
                             <p>{{ $task->content }}</p>
-                            <table class="data-table">
-                                <tr>
-                                    <th>x,м</th>
-                                    <td>0</td>
-                                    <td>4</td>
-                                    <td>9</td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <th>t,с</th>
-                                    <td>0</td>
-                                    <td>7</td>
-                                    <td>14</td>
-                                    <td>21</td>
-                                </tr>
-                            </table>
                         </div>
+                        <img src="{{ asset('images/tasks/2_1_3.jpg') }}" alt="">
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                <div class="answer-block">
-                                    <label class="answer-label">Ответ:</label>
-                                    <select name="answers[]" class="answer-select" required>
-                                        <option value="">Выберите ответ</option>
-                                        <option value="1">движение равномерное</option>
-                                        <option value="0">движение неравномерное</option>
-                                    </select>
+                                    <div>
+                                        <input type="number" name="answers[]" class="displacement-input" placeholder="0" required>
+                                        <span>м.</span>
+                                    </div>
+                                <div class="task-actions">
+                                    @if($previousTask)
+                                        <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
+                                    @endif
+                                    @if($nextTask)
+                                        <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
+                                    @endif
                                 </div>
+                                @auth
+                                    <div class="btn-check_block">
+                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
+                                    </div>
+                                @else
+                                    <div class="auth-alert">
+                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                    </div>
+                                @endauth
                             </form>
-                            <div class="task-actions">
-                                @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
-                                @endif
-                                @if($nextTask)
-                                    <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
-                                @endif
-                            </div>
-                            @auth
-                                <div class="btn-check_block">
-                                    <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
-                                </div>
-                            @else
-                                <div class="auth-alert">
-                                    <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
-                                </div>
-                            @endauth
                         </div>
                     </div>
                 </div>

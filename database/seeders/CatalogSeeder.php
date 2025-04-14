@@ -34,6 +34,17 @@ class CatalogSeeder extends Seeder
                     ['order' => 4, 'title' => 'Равномерное движение по окружности']
                 ]
             ],
+            [
+                'title' => 'Основы динамики',
+                'slug' => 'dynamics-basics',
+                'order' => 3,
+                'topics' => [
+                    ['order' => 1, 'title' => 'Законы Ньютона'],
+                    ['order' => 2, 'title' => 'Сила тяготения'],
+                    ['order' => 3, 'title' => 'Сила упругости'],
+                    ['order' => 4, 'title' => 'Силы трения']
+                ]
+            ],
         ];
 
         foreach ($sections as $sectionData) {

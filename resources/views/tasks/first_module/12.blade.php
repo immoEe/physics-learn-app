@@ -18,15 +18,15 @@
                                 <a class="header__navigation-link" href="{{ route('welcome') }}">Главная</a>
                             </li>
                             <li class="header__navigation-item active">
-                                <a class="header__navigation-link" href="{{ route('catalog') }}">каталог</a>
+                                <a class="header__navigation-link" href="{{ route('catalog') }}">Каталог</a>
                             </li>
                             @auth
                                 <li class="header__navigation-item">
-                                    <a class="header__navigation-link" href="{{ route('dashboard') }}">личный кабинет</a>
+                                    <a class="header__navigation-link" href="{{ route('dashboard') }}">Личный кабинет</a>
                                 </li>
                             @else
                                 <li class="header__navigation-item">
-                                    <a class="header__navigation-link" href="{{ route('register') }}">вход/регистрация</a>
+                                    <a class="header__navigation-link" href="{{ route('register') }}">Вход/Регистрация</a>
                                 </li>
                             @endauth
                         </ul>
@@ -37,14 +37,14 @@
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
-                    <div class="task-header">
-                        <h1 class="task-title">Стандартный вид числа</h1>
+                <div class="task-header">
+                        <h1 class="task-title">{{ $task->name }}</h1>
                         <div class="task-meta">
-                            <span class="task-difficulty difficulty-medium">
-                                сложность: средняя
+                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                Сложность: {{ $task->difficulty }}
                             </span>
                             <span class="task-points">
-                                можно заработать: 2 очк.
+                                Можно заработать: {{ $task->points }} очк.
                             </span>
                             @if(session('message'))
                             <div class="alert {{ session('message_type') }}">
@@ -54,20 +54,29 @@
                         </div>
                     </div>
                     <div class="task-content">
-                        <div class="task-description">
-                            <h3>условие задания:</h3>
-                            <p>запиши число в стандартном виде: 7537000.</p>
-                        </div>
+                    <div class="task-description">
+                        <h3>Условие задания:</h3>
+                        <p>{{ $task->content }}</p>
+                    </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 <div class="answer-block">
-                                    <label class="answer-label">ответ</label>
+                                    <label class="answer-label">Численная часть:</label>
                                     <input 
                                         type="text" 
                                         name="answers[]"
                                         class="answer-input"
-                                        placeholder="пример: 7.537×10⁶"
+                                        placeholder="пример: 7.537×10"
+                                        required
+                                        autocomplete="off"
+                                    >
+                                    <label style="margin-top: 20px" class="answer-label">Степень:</label>
+                                    <input 
+                                        type="text" 
+                                        name="answers[]"
+                                        class="answer-input"
+                                        placeholder="пример: 6"
                                         required
                                         autocomplete="off"
                                     >

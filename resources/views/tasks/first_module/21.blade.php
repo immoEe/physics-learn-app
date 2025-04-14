@@ -56,7 +56,7 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>{{ $task->content }}</p>
+                            <p>Заполни пропуск:</p>
                         </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">

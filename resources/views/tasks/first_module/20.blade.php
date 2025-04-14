@@ -74,7 +74,7 @@
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
                                 <div class="answer-block">
-                                    <p>1. Первые знания об окружающем нас мире возникают из ______.</p>
+                                    <p>Первые знания об окружающем нас мире возникают из ______.</p>
                                     <select name="answers[]" class="select-answer" required>
                                         <option value="опытов">опытов</option>
                                         <option value="чтения книг">чтения книг</option>

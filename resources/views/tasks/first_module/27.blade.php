@@ -6,6 +6,56 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
+    <style>
+        .conversion-block {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .conversion-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .conversion-input {
+            width: 120px;
+            padding: 10px 12px;
+            margin: 0 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: right;
+            background-color: #fff;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .conversion-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+        }
+        .conversion-input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .unit-input {
+            width: 60px;
+            padding: 10px;
+            margin-left: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
+        }
+        .base-unit {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -63,42 +113,43 @@
                                 @csrf
                                 <div class="conversion-block">
                                     <div class="conversion-item">
-                                        <span>17 ч = </span>
-                                        <input type="text" name="answers[]" class="conversion-input" value="1020" readonly>
-                                        <span> мин</span>
+                                        <span class="conversion-label">17 ч =</span>
+                                        <input type="text" name="answers[]" class="conversion-input">
+                                        <span class="unit-label">мин</span>
                                     </div>
                                     <div class="conversion-item">
-                                        <span>13 ч = </span>
-                                        <input type="text" name="answers[]" class="conversion-input" value="46800" readonly>
-                                        <span> с</span>
+                                        <span class="conversion-label">13 ч =</span>
+                                        <input type="text" name="answers[]" class="conversion-input">
+                                        <span class="unit-label">с</span>
                                     </div>
                                     <div class="conversion-item">
-                                        <span>25 мин = </span>
-                                        <input type="text" name="answers[]" class="conversion-input" value="1500" readonly>
+                                        <span class="conversion-label">25 мин =</span>
+                                        <input type="text" name="answers[]" class="conversion-input">
+                                        <span class="unit-label">с</span>
                                     </div>
                                     <div class="base-unit">
-                                        <span>Основная единица времени в СИ: </span>
+                                        <span class="base-unit-label">Основная единица времени в СИ:</span>
                                         <input type="text" name="answers[]" class="unit-input" placeholder="с" required>
                                     </div>
                                 </div>
+                                <div class="task-actions">
+                                    @if($previousTask)
+                                        <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
+                                    @endif
+                                    @if($nextTask)
+                                        <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
+                                    @endif
+                                </div>
+                                @auth
+                                    <div class="btn-check_block">
+                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
+                                    </div>
+                                @else
+                                    <div class="auth-alert">
+                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                    </div>
+                                @endauth
                             </form>
-                            <div class="task-actions">
-                                @if($previousTask)
-                                    <a href="{{ route('tasks.show', $previousTask) }}" class="btn btn-next">← Предыдущее задание</a>
-                                @endif
-                                @if($nextTask)
-                                    <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
-                                @endif
-                            </div>
-                            @auth
-                                <div class="btn-check_block">
-                                    <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
-                                </div>
-                            @else
-                                <div class="auth-alert">
-                                    <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
-                                </div>
-                            @endauth
                         </div>
                     </div>
                 </div>

@@ -13,11 +13,10 @@ class ProfileService
         $userPoints = $user->points;
 
         $newRank = match(true) {
-            $userPoints == 1000 => "Радиант",
-            $userPoints >= 650 && $userPoints <= 999 => "Кандидат наук",
-            $userPoints >= 501 && $userPoints <= 649 => "Эксперт",
-            $userPoints >= 251 && $userPoints <= 500 => "Мастер",
-            $userPoints >= 100 && $userPoints <= 250 => "Подмастерье",
+            $userPoints >= 70 && $userPoints <= 999 => "Кандидат наук",
+            $userPoints >= 50 && $userPoints <= 649 => "Эксперт",
+            $userPoints >= 25 && $userPoints <= 500 => "Мастер",
+            $userPoints >= 10 && $userPoints <= 250 => "Подмастерье",
             $userPoints >= 0 && $userPoints <= 99 => "Новичок",
             default => "Новичок"
         };

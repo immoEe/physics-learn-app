@@ -9,6 +9,13 @@
         <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
         <link rel="stylesheet" href="{{asset('styles/app.css')}}">
         <link rel="stylesheet" href="{{asset('styles/tasks.css')}}">
+
+        <style>
+            .solved-task {
+                background-color:rgb(80, 199, 80) !important;
+                transition: background-color 0.3s ease;
+            }
+        </style>
         <title>Learn Physics</title>
     </head>
     <body>
@@ -45,7 +52,7 @@
                 
                 <div class="tasks-list">
                     @foreach($tasks as $task)
-                    <div class="task-item">
+                    <div class="task-item task-card @if(auth()->check() && auth()->user()->hasSolved($task)) solved-task @endif">
                         <a href="{{ route('tasks.show', $task) }}" class="task-link">
                             <div class="task-header">
                                 <span class="task-number">{{ $loop->iteration }}.</span>

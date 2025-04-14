@@ -38,13 +38,13 @@
             <div class="wrapper">
                 <div class="task-page">
                     <div class="task-header">
-                        <h1 class="task-title">Явления природы</h1>
+                        <h1 class="task-title">{{ $task->name }}</h1>
                         <div class="task-meta">
-                            <span class="task-difficulty difficulty-medium">
-                                Сложность: Средняя
+                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                Сложность: {{ $task->difficulty }}
                             </span>
                             <span class="task-points">
-                                Можно заработать: 2 очк.
+                                Можно заработать: {{ $task->points }} очк.
                             </span>
                             @if(session('message'))
                             <div class="alert {{ session('message_type') }}">
@@ -54,10 +54,10 @@
                         </div>
                     </div>
                     <div class="task-content">
-                        <div class="task-description">
-                            <h3>Условие задания:</h3>
-                            <p>Отметь, к каким явлениям природы относится процесс «ночью на небе загадочно мерцают звезды».</p>
-                        </div>
+                    <div class="task-description">
+                        <h3>Условие задания:</h3>
+                        <p>{{ $task->content }}</p>
+                    </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf

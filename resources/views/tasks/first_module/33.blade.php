@@ -6,58 +6,6 @@
     <link rel="stylesheet" href="{{asset('styles/utils.css')}}">
     <link rel="stylesheet" href="{{asset('styles/app.css')}}">
     <link rel="stylesheet" href="{{asset('styles/modules/first-module.css')}}">
-    <style>
-        .conversion-container {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .conversion-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-        .conversion-input {
-            width: 150px;
-            padding: 10px 12px;
-            margin: 0 10px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            font-size: 16px;
-            text-align: right;
-            background-color: #fff;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-        .conversion-input:focus {
-            border-color: #80bdff;
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
-        }
-        .unit-label {
-            font-weight: 500;
-            color: #495057;
-        }
-        .unit-sup {
-            vertical-align: super;
-            font-size: 0.8em;
-        }
-        .btn-check {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.2s;
-        }
-        .btn-check:hover {
-            background-color: #218838;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -103,27 +51,20 @@
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>{{ $task->content }}</p>
+                            <p>Тело двигалось криволинейно из точки A в точку B. Перечисли через запятую все физические величины, которые характеризуют такое движение.</p>
                         </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
                                 @csrf
-                                <div class="conversion-container">
-                                    <div class="conversion-item">
-                                        <span class="unit-label">123 см<span class="unit-sup">2</span> =</span>
-                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
-                                        <span class="unit-label">м<span class="unit-sup">2</span></span>
-                                    </div>
-                                    <div class="conversion-item">
-                                        <span class="unit-label">26 дм<span class="unit-sup">2</span> =</span>
-                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
-                                        <span class="unit-label">м<span class="unit-sup">2</span></span>
-                                    </div>
-                                    <div class="conversion-item">
-                                        <span class="unit-label">56153 мм<span class="unit-sup">2</span> =</span>
-                                        <input type="number" name="answers[]" class="conversion-input" step="0.0001" placeholder="0.0000" required>
-                                        <span class="unit-label">м<span class="unit-sup">2</span></span>
-                                    </div>
+                                <div class="answer-block">
+                                    <input 
+                                        type="text" 
+                                        name="answer"
+                                        class="answer-input"
+                                        placeholder="Введите физические величины через запятую"
+                                        required
+                                        autocomplete="off"
+                                    >
                                 </div>
                                 <div class="task-actions">
                                     @if($previousTask)

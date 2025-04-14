@@ -36,16 +36,7 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
         }
-        .unit-label {
-            font-weight: 500;
-            color: #495057;
-        }
-        .task-description {
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 6px;
-        }
+
     </style>
 </head>
 <body>
@@ -78,21 +69,26 @@
         <main class="main">
             <div class="wrapper">
                 <div class="task-page">
-                    <div class="task-header">
-                        <h1 class="task-title">Преобразование единиц длины</h1>
+                <div class="task-header">
+                        <h1 class="task-title">{{ $task->name }}</h1>
                         <div class="task-meta">
-                            <span class="task-difficulty difficulty-medium">
-                                Сложность: Средняя
+                            <span class="task-difficulty difficulty-{{ strtolower($task->difficulty) }}">
+                                Сложность: {{ $task->difficulty }}
                             </span>
                             <span class="task-points">
-                                Можно заработать: 5 очк.
+                                Можно заработать: {{ $task->points }} очк.
                             </span>
+                            @if(session('message'))
+                            <div class="alert {{ session('message_type') }}">
+                                {{ session('message') }}
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="task-content">
                         <div class="task-description">
                             <h3>Условие задания:</h3>
-                            <p>Преобразуй данные единицы длины. <em>(Ответы округляй до четырёх цифр после запятой!)</em></p>
+                            <p>{{ $task->content }}</p>
                         </div>
                         <div class="task-answers">
                             <form id="task-form" method="POST" action="{{ route('tasks.check', $task) }}">
@@ -127,9 +123,15 @@
                                         <a href="{{ route('tasks.show', $nextTask) }}" class="btn btn-next">Следующее задание →</a>
                                     @endif
                                 </div>
-                                <div class="btn-check_block">
-                                    <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
-                                </div>
+                                @auth
+                                    <div class="btn-check_block">
+                                        <button type="submit" form="task-form" class="btn btn-check">Проверить</button>
+                                    </div>
+                                @else
+                                    <div class="auth-alert">
+                                        <p>Для проверки необходимо <a href="{{ route('login') }}">войти</a></p>
+                                    </div>
+                                @endauth
                             </form>
                         </div>
                     </div>
