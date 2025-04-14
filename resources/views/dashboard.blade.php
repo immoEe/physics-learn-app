@@ -70,9 +70,9 @@
                     <div class="ranking__item-points">
                         <span>{{ number_format($userData['points'], 0, ',', ' ') }} очков</span>
                         <div class="ranking__progress">
-                            <div class="ranking__progress-fill" 
-                                 style="width: {{ ($userData['points'] / 10)}}%">
-                            </div>
+                        <div class="ranking__progress-fill" 
+     style="width: {{ ($userData['points'] / 70) * 100 }}%">
+</div>
                         </div>
                     </div>
                 </li>
