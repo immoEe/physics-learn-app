@@ -83,11 +83,11 @@ class UsersSeeder extends Seeder
     private function determineRank(int $points): string
     {
         return match(true) {
-            $points == 1000 => "Гуру",
-            $points >= 650 => "Кандидат наук",
-            $points >= 501 => "Эксперт",
-            $points >= 251 => "Мастер",
-            $points >= 100 => "Подмастерье",
+            $points == 70 => "Гуру",
+            $points >= 65 => "Кандидат наук",
+            $points >= 50 => "Эксперт",
+            $points >= 25 => "Мастер",
+            $points >= 10 => "Подмастерье",
             default => "Новичок"
         };
     }

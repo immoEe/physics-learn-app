@@ -21,7 +21,6 @@ class TaskService
 
         $userAnswerString = implode('|', $userAnswers);
 
-        dd($userAnswerString);
 
         $correctAnswer = mb_strtolower(str_replace(' ', '', $task->correct_answers));
 
